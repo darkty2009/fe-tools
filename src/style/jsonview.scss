@@ -1,0 +1,60 @@
+@import '../common/function';
+
+.page {
+  margin:10px 0;
+}
+
+div.jsoneditor {
+  border:1px solid $primary;
+  border-radius:6px 6px;
+}
+
+div.jsoneditor-menu {
+  border-bottom:1px solid $primary;
+  background-color:$primary;
+}
+
+.jsonviews {
+  display:flex;
+  flex-direction: row;
+  width:100%;
+
+  >div {
+    flex:1;
+
+    &:nth-child(1) {
+      margin-right:10px;
+    }
+  }
+
+  .jsoneditor-format {
+    color:$text1;
+  }
+}
+
+.operations {
+  margin-bottom:10px;
+}
+
+.button-group {
+  >.rui-button {
+    border-radius:0 0;
+    border-right:0px;
+  }
+
+  .rui-button:first-child {
+    border-radius:6px 0 0 6px;
+  }
+
+  .rui-button:last-child {
+    border-right:1px solid $border;
+    border-radius:0 6px 6px 0;
+  }
+}
+
+.dialog-open-row {
+  width:415px;
+  label {
+    line-height:32px;
+  }
+}
