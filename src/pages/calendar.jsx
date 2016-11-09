@@ -127,7 +127,6 @@ class Calendar extends Component {
                         toolbar: require('./calendar/toolbar.jsx').default,
                         event: require('./calendar/normal_event.jsx').default
                     }}
-                    view={'week'}
                     onSelectEvent={this.openEdit.bind(this)}
                 />}
             </div>
