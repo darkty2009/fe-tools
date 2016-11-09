@@ -1,8 +1,10 @@
 var route = require('koa-router')();
 var parse = require('co-body');
 var koa = require('koa');
+var serve = require('koa-static');
 var fs = require('fs');
 var fetch = require('node-fetch');
+var path = require('path');
 
 var process = require('process');
 var ENV = process.env.NODE_ENV;
@@ -15,9 +17,14 @@ app.use(route.routes());
 app.use(require('./routers/util.js'));
 app.use(require('./routers/event.js'));
 
-app.listen(ENV == 'production' ? 80 : 3000);
+app.use(serve('.'));
+
+console.log(ENV);
+app.listen(ENV == 'production' ? 3000 : 3000);
 
 function *index() {
     this.type = 'text/html; charset=utf-8';
-    this.body = fs.readFileSync(ENV == 'production' ? './index_online.html' : './index.html');
+    var file = path.resolve(__dirname, ENV == 'production' ? '../index_online.html' : '../index.html');
+    var content = fs.readFileSync(file);
+    this.body = content;
 }
