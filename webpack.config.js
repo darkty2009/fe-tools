@@ -62,7 +62,13 @@ var config = {
             }
         ],
         noParse:[react]
-    }
+    },
+    plugins:[
+        //防止压缩代码后redux报错
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+        })
+    ]
 };
 
 module.exports = config;
