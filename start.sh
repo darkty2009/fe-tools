@@ -1,6 +1,5 @@
-#webpack -p
+webpack -p
 
 datestr=$(date +%Y%m%d%H%M)
-
 mkdir logs
-nohup sudo npm run start > logs/$datestr.log &
+nohup npm run start > logs/$datestr.log &
