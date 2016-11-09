@@ -105,6 +105,20 @@ class QRCodeView extends Component {
         image.src = content;
     }
 
+    download() {
+        var canvas = $('.qrcode canvas');
+        if(canvas.length) {
+            var formatter = new RUI.DateFormatter('Y-m-d H:i:s');
+            var content = canvas[0].toDataURL('image/png');
+            var a = document.createElement('a');
+            a.download = 'qrcode-' + formatter.toString() + '.png';
+            a.href = (content);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    }
+
     render() {
         return <div className="page">
             <div className="row">
@@ -119,7 +133,7 @@ class QRCodeView extends Component {
                 <div className="button-group">
                     <RUI.Button onClick={this.create.bind(this)} className="primary">生成</RUI.Button>
                     <RUI.Button onClick={this.open.bind(this)}>解码</RUI.Button>
-                    <RUI.Button>下载</RUI.Button>
+                    <RUI.Button onClick={this.download.bind(this)}>下载</RUI.Button>
                 </div>
             </div>
             <RUI.Dialog ref="openDialog" buttons={"submit,cancel"} onSubmit={this.openSubmit.bind(this)} title="选择">
