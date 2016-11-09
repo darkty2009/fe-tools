@@ -109,7 +109,7 @@ class JSONView extends Component {
     ajaxRemote(url) {
         return new Promise((resolve, reject)=>{
             $.ajax({
-                url:url,
+                url:'/util/proxy/' + encodeURIComponent(url),
                 dataType:"json",
                 success:function(response) {
                     resolve(response);

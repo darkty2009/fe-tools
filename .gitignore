@@ -1,5 +1,7 @@
+logs
 *.log
 *.css.map
 .idea
 node_modules
 dist
+*.sqlite3

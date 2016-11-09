@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "webpack -p",
+    "start": "NODE_ENV=production node server/index.js",
     "example": "NODE_ENV=development webpack-dev-server --config webpack.config.js --devtool eval --progress --colors --inline --port 8008 --host 0.0.0.0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -46,6 +48,11 @@
     "jsoneditor": "5.5.9",
     "json-loader": "0.5.4",
     "svg-loader": "0.0.2",
-    "baseline.js": "1.2.0"
+    "baseline.js": "1.2.0",
+    "sqlite3": "3.1.8",
+    "koa": "1.2.4",
+    "koa-router": "5.4.0",
+    "co-body": "4.2.0",
+    "node-fetch": "1.6.3"
   }
 }

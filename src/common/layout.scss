@@ -32,3 +32,27 @@
     }
   }
 }
+
+.default {
+  margin:10px 0;
+  position:fixed;
+  bottom:0;
+  width:80%;
+
+  h5 {
+    font-size:14px;
+  }
+
+  .links {
+    display:flex;
+    flex-direction: row;
+    margin:10px 0;
+
+    .link {
+      display:flex;
+      flex:1;
+      width:100%;
+      justify-content: flex-start;
+    }
+  }
+}

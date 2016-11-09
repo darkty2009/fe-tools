@@ -75,7 +75,7 @@ class QRCodeView extends Component {
 
     ajaxRemote(url) {
         return new Promise((resolve, reject)=>{
-            resolve(url);
+            resolve('/util/proxy/' + encodeURIComponent(url));
         });
     }
 
