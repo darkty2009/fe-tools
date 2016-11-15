@@ -120,7 +120,7 @@ class QRCodeView extends Component {
     }
 
     render() {
-        return <div className="row"><div className="page">
+        return <div className="row"><div className="page page-qrcode">
             <div className="row">
                 <RUI.Textarea ref="source" className="source" placeholder="请输入文本" maxLengthHandler={()=>1} />
                 <div className="result">

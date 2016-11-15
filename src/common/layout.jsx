@@ -16,6 +16,7 @@ export default class Layout extends Component {
                         <li><Link to="/layout" activeClassName="active">布局工具</Link></li>
                         <li><Link to="/jsonview" activeClassName="active">JSON格式化</Link></li>
                         <li><Link to="/qrcode" activeClassName="active">二维码</Link></li>
+                        <li><Link to="/scanpay" activeClassName="active">招码付</Link></li>
                     </ul>
                 </div>
             </div>

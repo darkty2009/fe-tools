@@ -1,6 +1,6 @@
 @import '../common/function';
 
-.page {
+.page-jsonview {
   margin:10px 0;
 }
 
@@ -21,7 +21,7 @@ div.jsoneditor-menu {
 
   >div {
     flex:1;
-
+    height:100%;
     &:nth-child(1) {
       margin-right:10px;
     }

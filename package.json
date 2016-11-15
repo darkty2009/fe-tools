@@ -7,6 +7,7 @@
     "build": "webpack -p",
     "start": "NODE_ENV=production node server/index.js",
     "example": "NODE_ENV=development webpack-dev-server --config webpack.config.js --devtool eval --progress --colors --inline --port 8008 --host 0.0.0.0",
+    "example-win": "set NODE_ENV=development&webpack-dev-server --config webpack.config.js --devtool eval --progress --colors --inline --port 8008 --host 0.0.0.0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -31,6 +32,7 @@
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.6",
     "css-loader": "^0.23.0",
+    "svg-url-loader": "1.1.0",
     "bundle-loader": "^0.5.4",
     "markdown-loader": "^0.1.7",
     "webpack-require-http": "0.3.0",
@@ -56,6 +58,12 @@
     "node-fetch": "1.6.3",
     "koa-static": "2.0.0",
     "react-dnd": "2.1.4",
-    "react-dnd-html5-backend": "2.1.2"
+    "react-dnd-html5-backend": "2.1.2",
+    "url":"^0.11.0",
+    "md5":"^2.0.0",
+    "node-fetch":"latest",
+    "canvas":"latest",
+    "qrcode":"latest",
+    "progress":"latest"
   }
 }

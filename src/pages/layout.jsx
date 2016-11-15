@@ -43,7 +43,7 @@ class LayoutTool extends Component {
     }
 
     render() {
-        return <div className="page">
+        return <div className="page page-layout">
             <div className="menu-left">
                 <div className="menu-panel">
                     <div className="operations">
