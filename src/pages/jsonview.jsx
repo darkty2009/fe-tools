@@ -119,7 +119,7 @@ class JSONView extends Component {
     }
 
     render() {
-        return <div className="page">
+        return <div className="row"><div className="page">
             <div className="operations">
                 <div className="button-group">
                     <RUI.Button onClick={this.clear.bind(this)}>清空</RUI.Button>
@@ -152,7 +152,7 @@ class JSONView extends Component {
                     </div>
                 </div>
             </RUI.Dialog>
-        </div>;
+        </div></div>;
     }
 }
 

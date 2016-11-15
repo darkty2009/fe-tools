@@ -54,6 +54,8 @@
     "koa-router": "5.4.0",
     "co-body": "4.2.0",
     "node-fetch": "1.6.3",
-    "koa-static": "2.0.0"
+    "koa-static": "2.0.0",
+    "react-dnd": "2.1.4",
+    "react-dnd-html5-backend": "2.1.2"
   }
 }

@@ -115,7 +115,7 @@ class Calendar extends Component {
     }
 
     render() {
-        return <div className="page">
+        return <div className="row"><div className="page">
             <div className="calendar-container">
                 {this.state.sizeComplete && <BigCalendar
                     events={this.props.events.map((event)=>{
@@ -210,7 +210,7 @@ class Calendar extends Component {
                     </div>
                 </RUI.Dialog>
             )}
-        </div>;
+        </div></div>;
     }
 }
 

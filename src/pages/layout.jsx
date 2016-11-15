@@ -1,41 +1,101 @@
 import React, {Component, PropTypes} from 'react';
 import RUI from 'react-component-lib';
 import {connect} from 'react-redux';
+import {DragDropContext} from 'react-dnd';
+import Backend from 'react-dnd-html5-backend';
+
+import '../style/layout.scss';
+//import '../library/jquery-ui-1.9.2.custom.js';
+import Accordion from './layout/accordion.jsx';
+import ComponentItem from './layout/component-item.jsx';
+import Container from './layout/components/container.jsx';
+
+import components from './layout/components.jsx';
 
 class LayoutTool extends Component {
+
+    static childContextTypes = {
+        editor: PropTypes.object
+    }
+
+    getChildContext() {
+        return {
+            editor: this.getEditor.bind(this)
+        }
+    }
+
     constructor(props) {
         super(props);
 
         this.state = {
-
+            mode: 'pc'
         };
     }
 
-    componentDidMount() {
-        RUI.DialogManager.alert('正在开发中');
+    modeChange(mode) {
+        this.setState({
+            mode
+        });
+    }
+
+    getEditor() {
+        return this.refs.editor;
     }
 
     render() {
         return <div className="page">
-            <RUI.Dialog ref="openDialog" buttons={"submit,cancel"} title="选择">
-                <div>
-                    <div className="row dialog-open-row" style={{marginBottom:10}}>
-                        <label className="left" style={{marginRight:10}}>选择文件</label>
-                        <div className="left">
-                            <RUI.Upload ref="localFile" />
+            <div className="menu-left">
+                <div className="menu-panel">
+                    <div className="operations">
+                        <div className="button-group">
+                            <RUI.Button>清空</RUI.Button>
+                            <RUI.Button>打开</RUI.Button>
+                            <RUI.Button>保存</RUI.Button>
                         </div>
                     </div>
-                    <div className="row dialog-open-row">
-                        <label className="left" style={{marginRight:10}}>远程URL</label>
-                        <div className="left">
-                            <RUI.Input ref="remoteURL" className="medium" />
+                    <div className="operations">
+                        <div className="button-group">
+                            <RUI.Button onClick={this.modeChange.bind(this, 'pc')} className={this.state.mode == 'pc' && 'primary'}>电脑</RUI.Button>
+                            <RUI.Button onClick={this.modeChange.bind(this, 'wx')} className={this.state.mode == 'wx' && 'primary'}>微信</RUI.Button>
+                            <RUI.Button onClick={this.modeChange.bind(this, 'rn')} className={this.state.mode == 'rn' && 'primary'}>APP</RUI.Button>
                         </div>
                     </div>
                 </div>
-            </RUI.Dialog>
+                <div className="menu-panel">
+                    <Accordion title={"布局组件 "+`${components.layout.length}`}>
+                        {components.layout.map(function(item, index) {
+                            return <ComponentItem data={item} key={item.title} />
+                        })}
+                    </Accordion>
+                </div>
+                <div className="menu-panel">
+                    <Accordion title={"基础组件 "+`${components.base.length}`}>
+                        {components.base.map(function(item, index) {
+                            return <ComponentItem data={item} key={item.title} />
+                        })}
+                    </Accordion>
+                </div>
+                <div className="menu-panel">
+                    <Accordion title={"高级组件 "+`${components.component.length}`}>
+                        {components.component.map(function(item, index) {
+                            return <ComponentItem data={item} key={item.title} />
+                        })}
+                    </Accordion>
+                </div>
+            </div>
+            <div className="content">
+                <div className="layoutit">
+                    <Container />
+                </div>
+            </div>
+            <div className="property-right">
+                <div ref="editor" />
+            </div>
         </div>;
     }
 }
+
+LayoutTool = DragDropContext(Backend)(LayoutTool);
 
 export default connect(function(state) {
     return state;

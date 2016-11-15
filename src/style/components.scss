@@ -1,0 +1,61 @@
+@import '../common/function';
+
+.layoutit {
+  &-container {
+    border:1px solid $border;
+    border-radius:6px 6px;
+    min-height:32px;
+    padding:36px 10px 10px;
+    position:relative;
+
+    &::before {
+      content:'容器';
+      color:$text1;
+      position:absolute;
+      top:0;
+      left:0;
+      padding:2px 10px;
+      border-right:1px solid $border;
+      border-bottom:1px solid $border;
+      border-radius:0 0 6px 0;
+    }
+  }
+
+  &-row,&-column {
+    display:flex;
+    border:1px solid $border;
+    background:$white;
+    border-radius:6px 6px;
+    position:relative;
+    padding:36px 10px 10px;
+    flex:1;
+
+    &::before {
+      content:'行';
+      color:$text1;
+      position:absolute;
+      top:0;
+      left:0;
+      padding:2px 10px;
+      border-right:1px solid $border;
+      border-bottom:1px solid $border;
+      border-radius:0 0 6px 0;
+    }
+  }
+
+  &-row {
+    min-height:32px;
+  }
+
+  &-column {
+    &::before {
+      content:'列'
+    }
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .dashed {
+    border:1px dashed darken($border, 30%);
+  }
+}

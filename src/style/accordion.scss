@@ -1,0 +1,31 @@
+@import '../common/function';
+
+.accordion {
+  border:1px solid $border;
+  background:$white;
+  border-radius:6px 6px;
+
+  height:33px;
+  overflow-y:hidden;
+  position:relative;
+
+  &::before {
+    display:inline-block;
+    content:(attr(title));
+    line-height:32px;
+    text-align:left;
+    text-indent:10px;
+    width:100%;
+    border-bottom:1px solid $border;
+  }
+
+  &:last-child {
+    padding-bottom:10px;
+  }
+
+  &.expand {
+
+  }
+
+  transition: height 0.3s ease-out;
+}

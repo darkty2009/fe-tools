@@ -1,0 +1,37 @@
+@import '../common/function';
+
+.wrapped-container {
+  position:relative;
+  display:flex;
+  flex:1;
+
+  >.actions {
+    position:absolute;
+    top:-22px;
+    right:0;
+    display:none;
+
+    .rui-link {
+      margin-left:10px;
+
+      &:first-child {
+        margin-left:0;
+      }
+    }
+
+    &:first-child {
+      margin-left:0;
+    }
+  }
+
+  &:hover {
+    >.actions {
+      display:block;
+    }
+  }
+
+  &.noflex {
+    dispaly:block;
+    flex:none;
+}
+}

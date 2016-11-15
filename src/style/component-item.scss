@@ -1,0 +1,15 @@
+@import '../common/function';
+
+.menu-item {
+  padding:10px 0 0;
+  display:flex;
+  &-title {
+    padding:0 10px;
+    flex:1;
+    line-height:34px;
+  }
+
+  .draggable {
+    margin-right:10px;
+  }
+}
