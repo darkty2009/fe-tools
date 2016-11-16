@@ -31,7 +31,7 @@ route.get('/progress/:id', function *progress() {
     var id = this.params.id;
     if(id) {
         var batchNo = id.substring(0, 4);
-        if(!fs.existsSync(path.resolve(qrcodeProject, id.log))) {
+        if(!fs.existsSync(path.resolve(qrcodeProject, id + '.log'))) {
             if(!fs.existsSync(path.resolve(qrcodeProject, 'out/' + batchNo + '.zip'))) {
                 this.body = format(true, 'complete');
             }else {
