@@ -19,7 +19,9 @@ export default (ComposedComponent, type)=>{
         }
 
         editHandler() {
-
+            if(ComposedComponent.component != 'row') {
+                this.context.editor().setComponent(this.refs.content);
+            }
         }
 
         deleteHandler() {
