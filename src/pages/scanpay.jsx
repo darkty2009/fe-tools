@@ -43,6 +43,7 @@ class ScanPayView extends Component {
         if(!batchNo || !batchNo.match(/^\d{4}$/)) {
             RUI.DialogManager.alert('请输入正确的批次号')
         }else {
+            RUI.DialogManager.alert('请勿关闭当前网页，如果关闭了就只能等了');
             $.ajax({
                 url:'/scanpay/create/' + batchNo,
                 dataType:'json',
