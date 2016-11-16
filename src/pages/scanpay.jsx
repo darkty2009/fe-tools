@@ -120,7 +120,7 @@ class ScanPayView extends Component {
                         {this.state.history.length ? this.state.history.map(function(item) {
                             return <div className="scanpay-history-item" key={item}>
                                 <label>{item}</label>
-                                <RUI.Button href={"/scanpay/download" + item.split('.')[0]} target="_blank">下载</RUI.Button>
+                                <RUI.Button href={"/scanpay/download/" + item.split('.')[0]} target="_blank">下载</RUI.Button>
                             </div>
                         }) : <p>暂无记录</p>}
                     </div>
