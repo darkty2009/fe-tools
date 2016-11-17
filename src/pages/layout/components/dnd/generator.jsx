@@ -9,8 +9,11 @@ export default {
             },
             canDrop(props, monitor) {
                 var result = monitor.getItem();
-                if(result && result.data.define.component == type) {
-                    return true;
+                if(result) {
+                    if(type instanceof Array) {
+                        return type.indexOf(result.data.define.component) >= 0;
+                    }
+                    return result.data.define.component == type;
                 }
                 return false;
             }

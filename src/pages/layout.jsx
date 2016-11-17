@@ -8,6 +8,7 @@ import '../style/layout.scss';
 //import '../library/jquery-ui-1.9.2.custom.js';
 import Accordion from './layout/accordion.jsx';
 import ComponentItem from './layout/component-item.jsx';
+import ComponentEditor from './layout/component-editor.jsx';
 import Container from './layout/components/container.jsx';
 
 import components from './layout/components.jsx';
@@ -89,7 +90,7 @@ class LayoutTool extends Component {
                 </div>
             </div>
             <div className="property-right">
-                <div ref="editor" />
+                <ComponentEditor ref="editor" />
             </div>
         </div>;
     }
