@@ -17,7 +17,9 @@ class Button extends Component {
 
     getDefaultClassName() {
         return [
-            'primary'
+            'primary',
+            'green',
+            'disable'
         ];
     }
 

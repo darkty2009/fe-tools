@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import RUI from 'react-component-lib';
 import { DropTarget } from 'react-dnd';
 import generator from './dnd/generator.jsx';
+import Column from './column.jsx';
 import Base from '../component-base.jsx';
 import unique from '../../../util/unique.jsx';
 
@@ -16,7 +17,7 @@ class Row extends Component {
         this.state = {
             hasDropped: false,
             hasDroppedOnChild: false,
-            list:[]
+            list:[<Column index={unique()} />]
         };
     }
 

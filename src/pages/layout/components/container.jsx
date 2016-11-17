@@ -19,7 +19,7 @@ class Container extends Component {
         this.state = {
             hasDropped: false,
             hasDroppedOnChild: false,
-            list:[<Row index={unique()} editable={true} onDelete={this.removeChild.bind(this)}/>]
+            list:[<Row index={unique()} editable={true} onDelete={this.removeChild.bind(this)}></Row>]
         };
     }
 
