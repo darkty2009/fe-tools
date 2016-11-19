@@ -1,5 +1,6 @@
 logs
 *.log
+*.error
 *.css.map
 .idea
 node_modules
