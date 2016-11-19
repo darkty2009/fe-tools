@@ -2,4 +2,5 @@ webpack -p
 
 datestr=$(date +%Y%m%d%H%M)
 mkdir logs
-nohup npm run start > logs/$datestr.log &
+
+NODE_ENV=production forever start -l logs/$datestr.log -e logs/$datestr.error -w -a server/index
