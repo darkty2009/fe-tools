@@ -63,6 +63,11 @@ var config = {
         ],
         noParse:[react]
     },
+    resolve:{
+        alias:{
+          "react-component-lib" : path.resolve(__dirname, "node_modules/react-component-lib/src/js/rui.jsx")
+        }
+    },
     plugins:[
         //防止压缩代码后redux报错
         new webpack.DefinePlugin({
