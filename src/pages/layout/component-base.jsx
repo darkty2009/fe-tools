@@ -28,6 +28,8 @@ export default (ComposedComponent, type)=>{
             if(this.props && this.props.onDelete) {
                 this.props.onDelete(this);
             }
+
+            this.context.editor().setComponent(null);
         }
 
         render() {
@@ -41,5 +43,48 @@ export default (ComposedComponent, type)=>{
         }
     }
     ComponentBase.component = type;
+
     return ComponentBase;
 }
+
+export var editable = {
+    all:function(target, option) {
+        option = option || {};
+        editable.styles(target, option.styles);
+        editable.children(target, option.children);
+        editable.className(target, option.className);
+        editable.properties(target, option.properties);
+    },
+    styles:function(target, def) {
+        target.state.styles = def || {};
+        target.setStyle = function(styles) {
+            target.setState({
+                styles
+            });
+        }
+    },
+    children:function(target, def) {
+        target.state.children = def || "文本";
+        target.setChildren = function(children) {
+            target.setState({
+                children
+            });
+        }
+    },
+    className:function(target, def) {
+        target.state.className = def || "";
+        target.setClassName = function(className) {
+            target.setState({
+                className
+            });
+        }
+    },
+    properties:function(target, def) {
+        target.state.properties = def || {};
+        target.setProperties = function(properties) {
+            target.setState({
+                properties
+            });
+        }
+    }
+};

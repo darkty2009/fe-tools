@@ -6,7 +6,8 @@ export default {
         {title:'列', define:require('./components/column.jsx').default}
     ],
     base:[
-        {title:'按钮', define:require('./components/button.jsx').default}
+        {title:'按钮', define:require('./components/button.jsx').default},
+        {title:'文本', define:require('./components/text.jsx').default}
     ],
     component:[
 

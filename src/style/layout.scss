@@ -12,6 +12,7 @@
   >.rui-button {
     border-radius:0 0;
     border-right:0px;
+    margin-left:0;
   }
 
   .rui-button:first-child {
@@ -42,7 +43,7 @@
     top:44px;
     left:0;
     padding:10px;
-    width:196px;
+    width:198px;
     height:100%;
     background: #efefef;
     border-right:1px solid $border;
@@ -51,7 +52,7 @@
   .content {
     background:#fefefe;
     flex:1;
-    margin:10px 226px 10px 226px;
+    margin:10px 226px 10px 228px;
     width:100%;
     height:100%;
   }

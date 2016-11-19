@@ -1,6 +1,24 @@
 @import '../common/function';
 
 .editor {
+  &-panel {
+    border:1px solid $border;
+    border-radius:6px 6px;
+    background:$white;
+    margin-bottom:10px;
+
+    &-title {
+      font-size:14px;
+      font-weight:normal;
+      line-height:32px;
+      text-indent:10px;
+      border-bottom:1px solid $border;
+    }
+
+    &-content {
+      padding:10px;
+    }
+  }
   &-dialog {
     z-index:1101;
 
@@ -14,6 +32,26 @@
         >div:first-child {
           margin-right:0;
         }
+      }
+    }
+  }
+
+  .rui-row {
+    display:flex;
+    flex-direction: row;
+
+    .rui-form-label {
+      float:none;
+      min-width:60px;
+      text-align:left;
+    }
+
+    .rui-form-content {
+      float:none;
+      flex:1;
+
+      >.rui-input {
+        width:100%;
       }
     }
   }

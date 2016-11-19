@@ -80,7 +80,7 @@ export default class ComponentEditor extends Component {
         this.editorStyleContent = this.state.comp.state.styles;
         RUI.DialogManager.confirm({
             title:"编辑样式",
-            message:<JSONStyler value={this.state.comp.state.styles} onChange={this.styleEditorChange.bind(this)} />,
+            message:<JSONStyler key={Date.now()} value={this.state.comp.state.styles} onChange={this.styleEditorChange.bind(this)} />,
             submit:this.styleChange.bind(this)
         });
     }
@@ -91,6 +91,20 @@ export default class ComponentEditor extends Component {
 
     styleChange() {
         this.state.comp.setStyle(this.editorStyleContent);
+    }
+
+    getFormControlChildren(item) {
+        if(item.type == 'boolean') {
+            return <RUI.Form.Control name={item.prop} type="checkbox">
+                <RUI.Checkbox label="" defaultSelected={0} value={item.prop} onChange={this.propertiesChange.bind(this)} />;
+            </RUI.Form.Control>;
+        }
+        return <RUI.Form.Control type={item.type} onBlur={this.propertiesChange.bind(this)} />;
+    }
+
+    propertiesChange() {
+        var values = this.refs.properties.getAllFieldValues();
+        debugger;
     }
 
     render() {
@@ -110,6 +124,15 @@ export default class ComponentEditor extends Component {
                         </div>
                     )}
 
+                    {this.state.comp.setStyle && (
+                        <div className="editor-panel">
+                            <h5 className="editor-panel-title">自定义样式</h5>
+                            <div className="editor-panel-content">
+                                <RUI.Button onClick={this.openStyleEditor.bind(this)}>点击编辑</RUI.Button>
+                            </div>
+                        </div>
+                    )}
+
                     {this.state.comp.setChildren && (
                         <div className="editor-panel">
                             <h4 className="editor-panel-title">内容编辑</h4>
@@ -119,11 +142,17 @@ export default class ComponentEditor extends Component {
                         </div>
                     )}
 
-                    {this.state.comp.setStyle && (
+                    {this.state.comp.setProperties && (
                         <div className="editor-panel">
-                            <h4 className="editor-panel-title">自定义样式</h4>
+                            <h4 className="editor-panel-title">属性配置</h4>
                             <div className="editor-panel-content">
-                                <RUI.Button onClick={this.openStyleEditor.bind(this)}>点击编辑</RUI.Button>
+                                <RUI.Form ref="properties" rules={{}} className="horizonal">
+                                    {this.state.comp.getDefaultProperties().map(function(item) {
+                                        return <RUI.Form.Row label={item.prop}>
+                                            {this.getFormControlChildren(item)}
+                                        </RUI.Form.Row>;
+                                    }.bind(this))}
+                                </RUI.Form>
                             </div>
                         </div>
                     )}
