@@ -29,7 +29,8 @@ class Button extends Component {
     }
 
     render() {
-        return <RUI.Button className={this.state.className} style={this.state.styles} editable={true}>{this.state.children}</RUI.Button>
+        var externalProps = this.state.properties ? this.state.properties : {};
+        return <RUI.Button className={this.state.className} style={this.state.styles} {...externalProps}>{this.state.children}</RUI.Button>
     }
 }
 

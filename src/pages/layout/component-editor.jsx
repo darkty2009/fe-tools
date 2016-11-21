@@ -95,16 +95,34 @@ export default class ComponentEditor extends Component {
 
     getFormControlChildren(item) {
         if(item.type == 'boolean') {
-            return <RUI.Form.Control name={item.prop} type="checkbox">
-                <RUI.Checkbox defaultSelected={0} value={item.prop}>&nbsp;</RUI.Checkbox>
+            return <RUI.Form.Control name={item.prop} type="checkbox" onChange={this.propertiesChange.bind(this)}>
+                <RUI.Checkbox value={item.prop} defaultSelected={this.state.comp.state.properties[item.prop] ? 1 : 0}>开启</RUI.Checkbox>
             </RUI.Form.Control>
         }
-        return <RUI.Form.Control type={item.type} onBlur={this.propertiesChange.bind(this)} />;
+        return <RUI.Form.Control name={item.prop} type={item.type} onBlur={this.propertiesChange.bind(this)} value={this.state.comp.state.properties[item.prop]} />;
     }
 
-    propertiesChange() {
+    propertiesChange(e) {
         var values = this.refs.properties.getAllFieldValues();
-        debugger;
+        if(this.state.comp && this.state.comp.setProperties) {
+            var data = {};
+            values.forEach(function(item) {
+                if(typeof item.value == 'string') {
+                    data[item.name] = item.value || "";
+                }
+                if(item.value instanceof Array) {
+                    data[item.name] = item.value[0].selected || item.value[0].defaultSelected;
+                }
+            });
+
+            this.state.comp.setProperties(data);
+        }
+
+        if(e && e.preventDefault) {
+            e.preventDefault();
+        }
+
+        return false;
     }
 
     render() {
@@ -146,9 +164,9 @@ export default class ComponentEditor extends Component {
                         <div className="editor-panel">
                             <h4 className="editor-panel-title">属性配置</h4>
                             <div className="editor-panel-content">
-                                <RUI.Form ref="properties" rules={{}} className="horizonal">
+                                <RUI.Form ref="properties" rules={{}} className="horizonal" onSubmit={this.propertiesChange.bind(this)}>
                                     {this.state.comp.getDefaultProperties().map(function(item) {
-                                        return <RUI.Form.Row label={item.prop} key={item.prop}>
+                                        return <RUI.Form.Row label={item.prop} key={"editor" + item.prop}>
                                             {this.getFormControlChildren(item)}
                                         </RUI.Form.Row>;
                                     }.bind(this))}

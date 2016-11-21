@@ -80,11 +80,20 @@ export var editable = {
         }
     },
     properties:function(target, def) {
-        target.state.properties = def || {};
+        var defaultProps = target.getDefaultProperties();
+        var defaultResult = {};
+        defaultProps.forEach(function(item) {
+            if(typeof item.default != 'undefined') {
+                defaultResult[item.prop] = item.default;
+            }
+        });
+
+        target.state.properties = Object.assign(def || {}, defaultResult);
         target.setProperties = function(properties) {
             target.setState({
                 properties
             });
-        }
+        };
+        target.setProperties(target.state.properties);
     }
 };
