@@ -96,8 +96,8 @@ export default class ComponentEditor extends Component {
     getFormControlChildren(item) {
         if(item.type == 'boolean') {
             return <RUI.Form.Control name={item.prop} type="checkbox">
-                <RUI.Checkbox label="" defaultSelected={0} value={item.prop} onChange={this.propertiesChange.bind(this)} />;
-            </RUI.Form.Control>;
+                <RUI.Checkbox defaultSelected={0} value={item.prop}>&nbsp;</RUI.Checkbox>
+            </RUI.Form.Control>
         }
         return <RUI.Form.Control type={item.type} onBlur={this.propertiesChange.bind(this)} />;
     }
@@ -148,7 +148,7 @@ export default class ComponentEditor extends Component {
                             <div className="editor-panel-content">
                                 <RUI.Form ref="properties" rules={{}} className="horizonal">
                                     {this.state.comp.getDefaultProperties().map(function(item) {
-                                        return <RUI.Form.Row label={item.prop}>
+                                        return <RUI.Form.Row label={item.prop} key={item.prop}>
                                             {this.getFormControlChildren(item)}
                                         </RUI.Form.Row>;
                                     }.bind(this))}
