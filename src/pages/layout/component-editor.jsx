@@ -99,6 +99,11 @@ export default class ComponentEditor extends Component {
                 <RUI.Checkbox value={item.prop} defaultSelected={this.state.comp.state.properties[item.prop] ? 1 : 0}>开启</RUI.Checkbox>
             </RUI.Form.Control>
         }
+        if(item.type == 'image') {
+            return <RUI.Form.Control name={item.prop} type="">
+                <p>12312312</p>
+            </RUI.Form.Control>;
+        }
         return <RUI.Form.Control name={item.prop} type={item.type} onBlur={this.propertiesChange.bind(this)} value={this.state.comp.state.properties[item.prop]} />;
     }
 

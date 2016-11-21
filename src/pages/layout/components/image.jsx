@@ -19,7 +19,7 @@ class Image extends Component {
 
     getDefaultProperties() {
         return [
-            {prop:'src', type:'input', default:'http://static.berbon.com/mall/images/webDiy/no_pic.png'},
+            {prop:'src', type:'upload', default:'http://static.berbon.com/mall/images/webDiy/no_pic.png'},
             {prop:'href', type:'input', default:'#'}
         ];
     }
