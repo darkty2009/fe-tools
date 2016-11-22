@@ -103,7 +103,7 @@ export default class ComponentEditor extends Component {
         }
         if(item.type == 'image') {
             return <RUI.Form.Control name={item.prop} type="">
-                <ImageEditor defaultValue={item.default || ""} />
+                <ImageEditor defaultValue={item.default || ""} onChange={this.propertiesChange.bind(this)}/>
             </RUI.Form.Control>;
         }
         return <RUI.Form.Control name={item.prop} type={item.type} onBlur={this.propertiesChange.bind(this)} value={this.state.comp.state.properties[item.prop]} />;
