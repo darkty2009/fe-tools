@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import RUI from 'react-component-lib';
 
+import ImageEditor from './editor/image.jsx';
+
 import JSONEditor from 'jsoneditor';
 import 'jsoneditor/dist/jsoneditor.min.css';
 
@@ -101,7 +103,7 @@ export default class ComponentEditor extends Component {
         }
         if(item.type == 'image') {
             return <RUI.Form.Control name={item.prop} type="">
-                <p>12312312</p>
+                <ImageEditor defaultValue={item.default || ""} />
             </RUI.Form.Control>;
         }
         return <RUI.Form.Control name={item.prop} type={item.type} onBlur={this.propertiesChange.bind(this)} value={this.state.comp.state.properties[item.prop]} />;
