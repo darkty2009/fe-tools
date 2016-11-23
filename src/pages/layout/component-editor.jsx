@@ -3,44 +3,43 @@ import ReactDOM from 'react-dom';
 import RUI from 'react-component-lib';
 
 import ImageEditor from './editor/image.jsx';
+import JSONEditor from './editor/json.jsx';
 
-import JSONEditor from 'jsoneditor';
 import 'jsoneditor/dist/jsoneditor.min.css';
 
-import '../../style/jsonview.scss';
 import '../../style/component-editor.scss';
 
-class JSONStyler extends Component {
+class JSONDialog extends Component {
     constructor(props) {
         super(props);
     }
 
-    componentDidMount() {
-        this.source = new JSONEditor(document.getElementById('json-target'), {
-            mode:'tree',
-            onChange:this.onSourceChange.bind(this, true)
+    getValue() {
+        debugger;
+        return this.editContent;
+    }
+
+    openDialog() {
+        this.editContent = {};
+        RUI.DialogManager.confirm({
+            title:this.props.title || "编辑",
+            message:<JSONEditor mode={this.props.mode || "tree"} key={Date.now()} value={this.props.value} onChange={this.editorChange.bind(this)} />,
+            submit:this.editorSubmit.bind(this)
         });
-        this.source.set(this.props.value);
     }
 
-    componentWillRecieveProps(nextProps) {
-        this.source.set(nextProps.value);
+    editorChange(data) {
+        this.editContent = data;
     }
 
-    onSourceChange() {
+    editorSubmit() {
         if(this.props.onChange) {
-            this.props.onChange(this.source.get());
+            this.props.onChange(this.getValue());
         }
     }
 
     render() {
-        return <div className="editor-dialog-json">
-            <div className="jsonviews">
-                <div className="json-flex" id="json-target">
-
-                </div>
-            </div>
-        </div>
+        return <RUI.Button style={{margin:0}} onClick={this.openDialog.bind(this)}>点击编辑</RUI.Button>;
     }
 }
 
@@ -82,7 +81,7 @@ export default class ComponentEditor extends Component {
         this.editorStyleContent = this.state.comp.state.styles;
         RUI.DialogManager.confirm({
             title:"编辑样式",
-            message:<JSONStyler key={Date.now()} value={this.state.comp.state.styles} onChange={this.styleEditorChange.bind(this)} />,
+            message:<JSONEditor mode="tree" key={Date.now()} value={this.state.comp.state.styles} onChange={this.styleEditorChange.bind(this)} />,
             submit:this.styleChange.bind(this)
         });
     }
@@ -98,7 +97,12 @@ export default class ComponentEditor extends Component {
     getFormControlChildren(item) {
         if(item.type == 'boolean') {
             return <RUI.Form.Control name={item.prop} type="checkbox" onChange={this.propertiesChange.bind(this)}>
-                <RUI.Checkbox value={item.prop} defaultSelected={this.state.comp.state.properties[item.prop] ? 1 : 0}>开启</RUI.Checkbox>
+                <RUI.Checkbox value={item.prop} defaultSelected={item.default ? 1 : 0}>开启</RUI.Checkbox>
+            </RUI.Form.Control>
+        }
+        if(item.type == 'select') {
+            return <RUI.Form.Control name={item.prop} className="w174" type="select" onChange={this.propertiesChange.bind(this)} data={item.data.map(it=>{return {key:it,value:it}})}>
+
             </RUI.Form.Control>
         }
         if(item.type == 'image') {
@@ -106,19 +110,28 @@ export default class ComponentEditor extends Component {
                 <ImageEditor defaultValue={item.default || ""} onChange={this.propertiesChange.bind(this)}/>
             </RUI.Form.Control>;
         }
+        if(item.type == 'json') {
+            return <RUI.Form.Control name={item.prop} type="">
+                <JSONDialog title={"编辑" + item.prop} mode="code" onChange={this.propertiesChange.bind(this)} value={item.default} />
+            </RUI.Form.Control>;
+        }
         return <RUI.Form.Control name={item.prop} type={item.type} onBlur={this.propertiesChange.bind(this)} value={this.state.comp.state.properties[item.prop]} />;
     }
 
     propertiesChange(e) {
         var values = this.refs.properties.getAllFieldValues();
+        console.log(values);
         if(this.state.comp && this.state.comp.setProperties) {
             var data = {};
             values.forEach(function(item) {
                 if(typeof item.value == 'string') {
                     data[item.name] = item.value || "";
                 }
-                if(item.value instanceof Array) {
+                else if(item.value instanceof Array) {
                     data[item.name] = item.value[0].selected || item.value[0].defaultSelected;
+                }
+                else if(typeof item.value == 'object') {
+                    data[item.name] = item.value.value;
                 }
             });
 

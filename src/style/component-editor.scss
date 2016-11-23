@@ -38,11 +38,10 @@
 
   .rui-row {
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
+    margin:0;
 
     .rui-form-label {
-      float:none;
-      width:60px;
       text-align:left;
     }
 
