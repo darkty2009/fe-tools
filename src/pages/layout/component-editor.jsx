@@ -12,18 +12,18 @@ import '../../style/component-editor.scss';
 class JSONDialog extends Component {
     constructor(props) {
         super(props);
+
+        this.editContent = this.props.value || {};
     }
 
     getValue() {
-        debugger;
         return this.editContent;
     }
 
     openDialog() {
-        this.editContent = {};
         RUI.DialogManager.confirm({
             title:this.props.title || "编辑",
-            message:<JSONEditor mode={this.props.mode || "tree"} key={Date.now()} value={this.props.value} onChange={this.editorChange.bind(this)} />,
+            message:<JSONEditor mode={this.props.mode || "tree"} key={Date.now()} value={this.editContent} onChange={this.editorChange.bind(this)} />,
             submit:this.editorSubmit.bind(this)
         });
     }
@@ -120,19 +120,31 @@ export default class ComponentEditor extends Component {
 
     propertiesChange(e) {
         var values = this.refs.properties.getAllFieldValues();
-        console.log(values);
         if(this.state.comp && this.state.comp.setProperties) {
             var data = {};
+            var canEditable = this.state.comp.getDefaultProperties();
             values.forEach(function(item) {
-                if(typeof item.value == 'string') {
+                var type = canEditable.find((it)=>{
+                    return it.prop == item.name;
+                });
+                if(type) {
+                    type = type.type;
+                }else {
+                    return;
+                }
+                if(~['input', 'image'].indexOf(type)) {
                     data[item.name] = item.value || "";
                 }
-                else if(item.value instanceof Array) {
+                if(~['boolean'].indexOf(type)) {
                     data[item.name] = item.value[0].selected || item.value[0].defaultSelected;
                 }
-                else if(typeof item.value == 'object') {
+                if(~['json'].indexOf(type)) {
+                    data[item.name] = item.value;
+                }
+                if(~['select'].indexOf(type)) {
                     data[item.name] = item.value.value;
                 }
+                console.log(type, item);
             });
 
             this.state.comp.setProperties(data);
