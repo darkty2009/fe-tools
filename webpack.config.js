@@ -65,7 +65,7 @@ var config = {
     },
     resolve:{
         alias:{
-          //"react-component-lib" : path.resolve(__dirname, "node_modules/react-component-lib/src/js/rui.jsx")
+          "react-component-lib" : path.resolve(__dirname, "node_modules/react-component-lib/src/js/rui.jsx")
         }
     },
     plugins:[

@@ -33,7 +33,7 @@ export default (ComposedComponent, type)=>{
         }
 
         render() {
-            return <div className={"wrapped-container " + (type == 'rui' ? 'noflex' : '')}>
+            return <div className={"wrapped-container " + (type == 'rui' && !ComposedComponent.useFlex ? 'noflex' : '')}>
                 <div className="actions">
                     <RUI.Link onClick={this.editHandler.bind(this)}>编辑</RUI.Link>
                     <RUI.Link onClick={this.deleteHandler.bind(this)}>删除</RUI.Link>
