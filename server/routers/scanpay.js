@@ -42,15 +42,19 @@ route.get('/progress/:id', function *progress() {
                 return new Promise(function (resolve, reject) {
                     var shell = `tail -n 1 ${id}.log`;
                     console.log(shell);
-                    child.exec(shell, {
-                        cwd: qrcodeProject
-                    }, function (err, out) {
-                        if (!err) {
-                            resolve(out)
-                        } else {
-                            resolve(err);
-                        }
-                    });
+                    try {
+                        child.exec(shell, {
+                            cwd: qrcodeProject
+                        }, function (err, out) {
+                            if (!err) {
+                                resolve(out)
+                            } else {
+                                resolve(err);
+                            }
+                        });
+                    }catch(e) {
+                        resolve(e);
+                    }
                 });
             })();
 
