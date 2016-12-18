@@ -13,6 +13,10 @@ class Radio extends Component {
         editable.properties(this);
     }
 
+    getTagName() {
+        return "RUI.Switch";
+    }
+
     getDefaultClassName() {
         return [];
     }

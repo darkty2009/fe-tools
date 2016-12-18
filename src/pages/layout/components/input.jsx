@@ -14,6 +14,10 @@ class Input extends Component {
         editable.properties(this);
     }
 
+    getTagName() {
+        return "RUI.Input";
+    }
+
     getDefaultClassName() {
         return [
             'small',

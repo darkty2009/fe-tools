@@ -13,6 +13,10 @@ class Image extends Component {
         editable.properties(this);
     }
 
+    getTagName() {
+        return "img";
+    }
+
     getDefaultClassName() {
         return [];
     }

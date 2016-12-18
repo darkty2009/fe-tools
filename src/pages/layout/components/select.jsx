@@ -14,6 +14,10 @@ class Select extends Component {
         editable.properties(this);
     }
 
+    getTagName() {
+        return "RUI.Select";
+    }
+
     getDefaultClassName() {
         return [
             'rui-theme-1',

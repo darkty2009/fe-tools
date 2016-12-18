@@ -15,6 +15,10 @@ class Table extends Component {
         editable.properties(this);
     }
 
+    getTagName() {
+        return "RUI.Table";
+    }
+
     getDefaultClassName() {
         return [];
     }

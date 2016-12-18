@@ -13,6 +13,10 @@ class Textarea extends Component {
         editable.properties(this);
     }
 
+    getTagName() {
+        return "RUI.Textarea";
+    }
+
     getDefaultProperties() {
         return [
             {prop:'disable', type:'boolean'},

@@ -23,13 +23,22 @@ class Column extends Component {
         editable.styles(this);
     }
 
+    getSourceCode() {
+        var result = this.state.list.map((comp, index)=>{
+            var comp = this.refs["item"+index];
+            return comp.getSourceCode();
+        }).join("");
+        return `<div className="${"auto-column "+this.state.className}" style={${JSON.stringify(this.state.styles)}}>${result}</div>`;
+    }
+
     getDefaultClassName() {
         return [
             'flex-start',
             'center',
             'flex-end',
             'space-between',
-            'space-around'
+            'space-around',
+            'initial'
         ];
     }
 
@@ -60,12 +69,16 @@ class Column extends Component {
     render() {
         const { greedy, isOver, isOverCurrent, connectDropTarget, children } = this.props;
         return connectDropTarget(<div className={"layoutit-column "+(isOverCurrent ? 'dashed' : '') + (" " + this.state.className) }>
-            {this.state.list}
+            {this.state.list.map((item, index)=>{
+                return React.cloneElement(item, {
+                    ref:"item"+index
+                })
+            })}
         </div>);
     }
 }
 
-Column = DropTarget('component-container-row', boxTarget, collect)(Base(Column));
+Column = DropTarget('component-container-row', boxTarget, collect)(Base(Column, "column"));
 Column.component = "column";
 
 export default Column;

@@ -115,6 +115,9 @@ export default class ComponentEditor extends Component {
                 <JSONDialog title={"编辑" + item.prop} mode="code" onChange={this.propertiesChange.bind(this)} value={item.default} />
             </RUI.Form.Control>;
         }
+        if(item.type == 'read') {
+            return <RUI.Form.Control name={item.prop} type={"input"} mode="static" value={this.state.comp.state.properties[item.prop]} />;
+        }
         return <RUI.Form.Control name={item.prop} type={item.type} onBlur={this.propertiesChange.bind(this)} value={this.state.comp.state.properties[item.prop]} />;
     }
 

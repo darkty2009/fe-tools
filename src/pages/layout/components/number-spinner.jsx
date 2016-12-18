@@ -13,6 +13,10 @@ class Spinner extends Component {
         editable.properties(this);
     }
 
+    getTagName() {
+        return "RUI.Spinner";
+    }
+
     getDefaultClassName() {
         return [];
     }
@@ -24,13 +28,14 @@ class Spinner extends Component {
             {prop:'max', type:'input', default:100},
             {prop:'min', type:'input', default:0},
             {prop:'keyboardEnable', type:'boolean', default:true},
-            {prop:'eventType', type:'input', default:'blur'}
+            {prop:'eventType', type:'input', default:'blur'},
+            {prop:'type', type:'read', default:'input'}
         ]
     }
 
     render() {
         var externalProps = this.state.properties ? this.state.properties : {};
-        return <RUI.Spinner className={this.state.className} style={this.state.styles} {...externalProps} type="input"/>
+        return <RUI.Spinner className={this.state.className} style={this.state.styles} {...externalProps}/>
     }
 }
 export default Base(Spinner, 'rui');

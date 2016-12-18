@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import RUI from 'react-component-lib';
+import empty from '../../util/empty.jsx';
 
 import '../../style/component-base.scss';
 
@@ -12,6 +13,23 @@ export default (ComposedComponent, type)=>{
 
         constructor(props) {
             super(props);
+        }
+
+        getSourceCode() {
+            if(type == 'row' || type == 'column') {
+                return this.refs.content.getSourceCode();
+            }
+
+            var content = this.refs.content;
+            var className = content.state.className;
+            var styles = content.state.styles;
+            var children = content.state.children;
+            var Tag = content.getTagName();
+
+            if(Tag == 'img') {
+                return `<${Tag} ${className ? `className="${className}"` : ""} ${empty(styles) ? "" : `style={${JSON.stringify(styles)}}`} />`;
+            }
+            return `<${Tag} ${className ? `className="${className}"` : ""} ${empty(styles) ? "" : `style={${JSON.stringify(styles)}}`}>${children ? children : ""}</${Tag}>`;
         }
 
         addChild(Instance, source) {

@@ -13,6 +13,10 @@ class DatePicker extends Component {
         editable.properties(this);
     }
 
+    getTagName() {
+        return "RUI.DatePicker";
+    }
+
     getDefaultClassName() {
         return [];
     }

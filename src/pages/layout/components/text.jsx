@@ -14,6 +14,10 @@ class Text extends Component {
         editable.children(this, '文本区域');
     }
 
+    getTagName() {
+        return "span";
+    }
+
     getDefaultClassName() {
         return [];
     }

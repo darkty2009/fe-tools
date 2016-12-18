@@ -14,6 +14,10 @@ class Button extends Component {
         });
     }
 
+    getTagName() {
+        return "RUI.Button";
+    }
+
     getDefaultClassName() {
         return [
             'primary',
@@ -30,7 +34,7 @@ class Button extends Component {
 
     render() {
         var externalProps = this.state.properties ? this.state.properties : {};
-        return <RUI.Button className={this.state.className} style={this.state.styles} {...externalProps}>{this.state.children}</RUI.Button>
+        return <RUI.Button ref="main" className={this.state.className} style={this.state.styles} {...externalProps}>{this.state.children}</RUI.Button>
     }
 }
 

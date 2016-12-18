@@ -23,6 +23,14 @@ class Container extends Component {
         };
     }
 
+    getSourceCode() {
+        var result = this.state.list.map((row, index)=>{
+            var row = this.refs["item" + index];
+            return row.decoratedComponentInstance.getSourceCode();
+        }).join("");
+        return `<div className="auto-container">${result}</div>`;
+    }
+
     componentDidMount() {
 
     }
@@ -54,7 +62,11 @@ class Container extends Component {
     render() {
         const { greedy, isOver, isOverCurrent, connectDropTarget, children } = this.props;
         return connectDropTarget(<div className={"layoutit-container "+(isOverCurrent ? 'dashed' : '') }>
-            {this.state.list}
+            {this.state.list.map((item, index)=>{
+                return React.cloneElement(item, {
+                    ref:'item'+index
+                })
+            })}
         </div>);
     }
 }
