@@ -16,6 +16,10 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import Routes from './routes.jsx';
 import reducers from './reducers/index.jsx';
 
+import 'http://cdn.bootcss.com/codemirror/5.21.0/codemirror.css';
+import 'http://cdn.bootcss.com/codemirror/5.21.0/codemirror.js';
+import 'http://cdn.bootcss.com/codemirror/5.21.0/mode/xml/xml.js';
+
 const store = createStore(
     reducers, {},
     compose(

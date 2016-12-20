@@ -14,6 +14,10 @@ class Radio extends Component {
         });
     }
 
+    getTagName() {
+        return "RUI.Radio";
+    }
+
     getDefaultClassName() {
         return [];
     }

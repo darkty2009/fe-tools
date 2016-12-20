@@ -13,6 +13,10 @@ class Pagination extends Component {
         editable.properties(this);
     }
 
+    getTagName() {
+        return "RUI.Pagination";
+    }
+
     getDefaultClassName() {
         return [];
     }

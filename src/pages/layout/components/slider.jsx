@@ -15,6 +15,10 @@ class Slider extends Component {
         editable.properties(this);
     }
 
+    getTagName() {
+        return "RUI.Slider";
+    }
+
     getDefaultClassName() {
         return [];
     }

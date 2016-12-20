@@ -1,5 +1,21 @@
 @import '../common/function';
 
+.preview {
+    .wrapped-container {
+        .actions {
+            display:none;
+        }
+    }
+    .layoutit-container,.layoutit-row,.layoutit-column {
+        border:0;
+        padding:0;
+        &::before {
+            content:'';
+            padding:0;
+        }
+    }
+}
+
 .layoutit {
   &-container {
     border:1px solid $border;
@@ -45,6 +61,7 @@
 
   &-row {
     min-height:32px;
+    justify-content: space-between;
   }
 
   &-column {
@@ -68,6 +85,10 @@
     }
     &.space-around {
         justify-content: space-around;
+    }
+    &.initial {
+        flex:initial;
+        min-width:35px;
     }
   }
 

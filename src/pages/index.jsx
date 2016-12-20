@@ -3,5 +3,6 @@ export default [
     'jsonview',
     'qrcode',
     'layout',
-    'scanpay'
+    'scanpay',
+    'layout-preview'
 ];

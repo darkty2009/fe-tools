@@ -14,6 +14,10 @@ class Radio extends Component {
         });
     }
 
+    getTagName() {
+        return "RUI.Checkbox";
+    }
+
     getDefaultClassName() {
         return [];
     }
