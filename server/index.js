@@ -17,6 +17,7 @@ app.use(route.routes());
 app.use(require('./routers/util.js'));
 app.use(require('./routers/event.js'));
 app.use(require('./routers/scanpay.js'));
+app.use(require('./routers/todo.js'));
 
 app.use(serve('.'));
 

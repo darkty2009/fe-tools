@@ -4,5 +4,6 @@ export default [
     'qrcode',
     'layout',
     'scanpay',
-    'layout-preview'
+    'layout-preview',
+    'todo'
 ];

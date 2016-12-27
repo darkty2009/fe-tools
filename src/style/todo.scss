@@ -1,0 +1,27 @@
+@import '../common/function';
+
+.page-todo {
+  margin:10px 0;
+
+  .full.rui-input {
+      line-height:48px;
+      font-size:24px;
+      height:50px;
+  }
+
+  &-list {
+      margin:10px auto;
+  }
+
+  &-item {
+      width:96%;
+      margin:10px auto;
+      background:#fff;
+      border:1px solid $border;
+      border-radius:6px 6px;
+      height:36px;
+      line-height:36px;
+      font-size:18px;
+      text-indent:10px;
+  }
+}
