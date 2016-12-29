@@ -9,13 +9,7 @@ var route = new Route({
 
 route.get('/list', function *list() {
     this.type = 'application/json';
-    var list = yield event.select();
-    list.sort(function(a, b) {
-        if(a.upload*1 > b.upload*1) {
-            return 1;
-        }
-        return a.id > b.id ? -1 : 1;
-    });
+    var list = yield event.select("", "order by id desc,upload asc");
     this.body = format(true, list);
 });
 
