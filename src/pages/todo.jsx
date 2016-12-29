@@ -51,7 +51,8 @@ class TodoItem extends Component {
         this.props.onSubmit(Object.assign({}, data, {
             director:this.refs.director.getValue()
         }, {
-            upload:upload || {}
+            upload:upload || {},
+            path:this.refs.path ? this.refs.path.getValue() : ""
         }));
 
         this.setState({
@@ -67,7 +68,7 @@ class TodoItem extends Component {
                 <p>{data.name}</p>
                 {data.director && <div className="director">{data.director}</div>}
                 <RUI.Button icon="edit" onClick={()=>this.setState({edit:!this.state.edit})}>编辑</RUI.Button>
-                {data.upload ? <RUI.Button href={`http://10.2.50.216:81/fe-tools/upload/ppt-${data.id}/index.html`} target="_blank" icon="link">预览</RUI.Button> : null}
+                {data.upload ? <RUI.Button href={`http://10.2.50.216:81/fe-tools/upload/ppt-${data.id}/${data.path || ""}`} target="_blank" icon="link">预览</RUI.Button> : null}
             </div>
             {this.state.edit && (
                 <div className="page-todo-line">
@@ -80,6 +81,9 @@ class TodoItem extends Component {
                         <RUI.Tooltip align="top-center">
                             只能上传.zip文件哦，后台会自动解压放到指定目录
                         </RUI.Tooltip>
+                    </div>}
+                    {this.state.director && <div style={{marginLeft:'10px'}}>
+                        <RUI.Input ref="path" defaultValue={data.path || ""} placeholder="解压后访问路径" />
                     </div>}
                     <RUI.Button icon={this.state.loading ? 'loading' : ''} onClick={()=>this.submitHandler()} className={`primary`} disable={this.state.director ? false : true}>保存</RUI.Button>
                 </div>

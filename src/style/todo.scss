@@ -1,6 +1,10 @@
 @import '../common/function';
 
 .page-todo {
+  .row {
+      width:90%;
+  }
+
   margin:10px 0;
   min-height:100%;
 
