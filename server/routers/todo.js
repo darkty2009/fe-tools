@@ -29,9 +29,13 @@ route.post('/edit', function *edit() {
     post = Object.assign({}, post, {
         upload: hash ? 1 : 0
     });
-    var result = yield event.update(post);
 
-    this.body = format(true, result);
+    if(post.director && post.director.indexOf('涵') > -1) {
+        this.body = format(false, null, '不能写涵哥');
+    }else {
+        var result = yield event.update(post);
+        this.body = format(true, result);
+    }
 
     if(post.upload && type == 'zip') {
         try {

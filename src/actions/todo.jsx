@@ -5,6 +5,8 @@ import {
     TODO_EVENT_UPDATE
 } from '../const.jsx';
 
+import RUI from 'react-component-lib';
+
 export function getTodoEventComplete(data) {
     return {
         type: TODO_EVENT_LIST_COMPLETE,
@@ -52,6 +54,8 @@ export function editTodoEvent(data) {
             success:function(response) {
                 if(response.success) {
                     dispatch(getTodoEventList());
+                }else {
+                    RUI.DialogManager.alert(response.message);
                 }
             }
         })
