@@ -67,7 +67,7 @@ class TodoItem extends Component {
                 <p>{data.name}</p>
                 {data.director && <div className="director">{data.director}</div>}
                 <RUI.Button icon="edit" onClick={()=>this.setState({edit:!this.state.edit})}>编辑</RUI.Button>
-                {data.upload ? <RUI.Button href={`http://10.2.50.216:81/upload/ppt-${data.id}/`} target="_blank" icon="link">预览</RUI.Button> : null}
+                {data.upload ? <RUI.Button href={`http://10.2.50.216:81/fe-tools/upload/ppt-${data.id}/index.html`} target="_blank" icon="link">预览</RUI.Button> : null}
             </div>
             {this.state.edit && (
                 <div className="page-todo-line">

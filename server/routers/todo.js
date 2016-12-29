@@ -38,7 +38,7 @@ route.post('/edit', function *edit() {
 
     if(post.upload && type == 'zip') {
         try {
-            yield (function () {
+            var error = yield (function () {
                 return new Promise(function (resolve, reject) {
                     var shell = `unzip ${hash} -d ppt-${post.id}`;
                     console.log(shell);
@@ -57,6 +57,7 @@ route.post('/edit', function *edit() {
                     }
                 });
             })();
+            console.log('unzip', error);
         }catch(e) {
 
         }
