@@ -11,7 +11,7 @@ route.get('/list', function *list() {
     this.type = 'application/json';
     var list = yield event.select();
     list.sort(function(a, b) {
-        return a.id > b.id ? (a.upload > b.upload ? -1 : 0) : 1
+        return a.id > b.id ? (a.upload > b.upload ? -1 : 0) : （a.upload > b.upload ? -1 : 1)
     });
     this.body = format(true, list);
 });
