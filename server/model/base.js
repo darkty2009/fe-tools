@@ -21,7 +21,9 @@ module.exports = {
             try {
                 where = where || '1=1';
                 plus = plus || "";
-                this.db().all(`SELECT * FROM ${this.table} where ${where} ${plus}`, function(err, rows) {
+                var sql = `SELECT * FROM ${this.table} where ${where} ${plus}`;
+                console.log(sql);
+                this.db().all(sql, function(err, rows) {
                     if(err) {
                         reject(err);
                     }else {
