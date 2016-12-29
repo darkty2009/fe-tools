@@ -1,6 +1,12 @@
 var fetch = require('node-fetch');
 var parse = require('co-body');
 var Route = require('koa-router');
+var path = require('path');
+var fs = require('fs');
+var md5 = require('md5');
+var os = require('os');
+var format = require('../util/format.js');
+var body = require('koa-better-body');
 
 var route = new Route({
     prefix:'/util'
@@ -20,6 +26,31 @@ route.get('/proxy/:url', function *proxy() {
     }else {
         this.body = "";
     }
+});
+
+route.post('/upload/file', body({multipart:true}), function* file() {
+    this.type = 'application/json';
+    var files = this.request.files;
+    var hash = "";
+    var type = "";
+    if(files && files.length) {
+        try {
+            hash = md5(Math.random().toString());
+            var file = files[0];
+            var newpath = path.resolve(__dirname, `../../upload/${hash}`);
+            var stream = fs.createWriteStream(newpath);
+            fs.createReadStream(file.path).pipe(stream);
+
+            type = file.type.split('/')[1];
+        }catch(e) {
+            console.log('upload file error', files);
+        }
+    }
+
+    this.body = format(true, {
+        hash:hash,
+        type:type || ""
+    });
 });
 
 module.exports = route.routes();

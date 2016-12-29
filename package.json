@@ -60,6 +60,8 @@
     "koa-static": "2.0.0",
     "react-dnd": "2.1.4",
     "react-dnd-html5-backend": "2.1.2",
-    "vkbeautify": "0.99.1"
+    "vkbeautify": "0.99.1",
+    "md5": "2.2.1",
+    "koa-better-body": "3.0.2"
   }
 }

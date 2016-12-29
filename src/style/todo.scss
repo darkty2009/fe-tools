@@ -2,6 +2,7 @@
 
 .page-todo {
   margin:10px 0;
+  min-height:100%;
 
   .full.rui-input {
       line-height:48px;
@@ -11,17 +12,98 @@
 
   &-list {
       margin:10px auto;
+      line-height:32px;
+  }
+
+  &-line {
+      width:95%;
+      border:1px solid $border;
+      box-shadow: 0 0 4px $border;
+      display:flex;
+      height:32px;
+      padding:10px;
+      margin: -11px auto 0;
+      border-radius: 0 0 6px 6px;
+      justify-content: flex-end;
+      z-index:99;
+      background:#fafafa;
+
+      .rui-input {
+          width:180px;
+      }
+
+      .rui-upload {
+          margin-left:10px;
+          position:relative;
+          z-index:200;
+
+          .rui-tooltip {
+              display:none !important;
+          }
+      }
+
+      .rui-button {
+          height:32px;
+      }
+
+      .rui-tooltip {
+          min-width:300px;
+      }
   }
 
   &-item {
       width:96%;
+      position:relative;
+      z-index:100;
       margin:10px auto;
       background:#fff;
       border:1px solid $border;
       border-radius:6px 6px;
       height:36px;
-      line-height:36px;
+      padding:4px 10px;
       font-size:18px;
-      text-indent:10px;
+      display:flex;
+      justify-content: center;
+
+      p {
+          flex:1;
+          line-height:36px;
+      }
+
+      .rui-button {
+          display:flex;
+          line-height:25px;
+          border:none;
+          &:hover {
+              border:none;
+          }
+
+          background:none;
+      }
+
+      .rui-icon-edit {
+          background-image:url('./images/edit.png');
+          background-size:18px 18px;
+          margin:3px 0;
+      }
+
+      .rui-icon-link {
+          background-image:url('./images/link.png');
+          background-size:18px 18px;
+          margin:3px 0;
+      }
+
+      .director {
+          line-height:36px;
+          color:$text2;
+      }
+
+      &.doing {
+          background:rgba(255, 255, 0, 0.1);
+      }
+
+      &.complete {
+          background:rgba(0, 255, 0, 0.1);
+      }
   }
 }

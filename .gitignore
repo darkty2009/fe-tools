@@ -8,3 +8,4 @@ dist
 *.sqlite3
 src/local.json
 .project
+upload
