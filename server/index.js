@@ -22,7 +22,7 @@ app.use(require('./routers/todo.js'));
 app.use(serve('.'));
 
 console.log(ENV);
-app.listen(ENV == 'production' ? 80 : 3000);
+app.listen(ENV == 'production' ? 3001 : 3000);
 
 function *index() {
     this.type = 'text/html; charset=utf-8';
