@@ -9,3 +9,4 @@ dist
 src/local.json
 .project
 upload
+.DS_Store
