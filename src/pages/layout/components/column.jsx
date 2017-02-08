@@ -18,7 +18,13 @@ class Column extends Component {
             hasDroppedOnChild: false,
             list:[]
         };
-
+        let _this = this;
+        if(props.source && props.source.content.length){
+            let list = this.state.list = [];
+            props.source.content.forEach(function(d){
+                list.push(<d.define index={unique()} source={d} editable={true} onDelete={_this.removeChild.bind(_this)} />);
+            });
+        }
         editable.className(this, 'flex-start');
         editable.styles(this);
     }
