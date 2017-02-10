@@ -147,6 +147,13 @@ class LayoutTool extends Component {
                         })}
                     </Accordion>
                 </div>
+                <div className="menu-panel">
+                    <Accordion title={"模板 "+`${components.module.length}`}>
+                        {components.module.map(function(item, index) {
+                            return <ComponentItem data={item} key={item.title} />
+                        })}
+                    </Accordion>
+                </div>
             </div>
             <div className={"content " + (this.state.preview)}>
                 <div className="layoutit">

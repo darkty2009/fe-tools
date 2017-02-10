@@ -18,10 +18,11 @@ class Row extends Component {
             hasDroppedOnChild: false,
             list:[<Column index={unique()} />]
         };
-        if(props.source && props.source.content.length){
+        let _this = this;
+        if(props.source && props.source.content && props.source.content.length){
             let list = this.state.list = [];
             props.source.content.forEach(function(d){
-                list.push(<Column index={unique()} source={d}/>);
+                list.push(<Column index={unique()} source={d} editable={true} onDelete={_this.removeChild.bind(_this)} />);
             });
         }
         editable.styles(this);
