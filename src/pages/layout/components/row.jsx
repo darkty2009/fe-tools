@@ -19,6 +19,8 @@ class Row extends Component {
             list:[<Column index={unique()} />]
         };
         let _this = this;
+
+        //当存在子列的时候,添加子列
         if(props.source && props.source.content && props.source.content.length){
             let list = this.state.list = [];
             props.source.content.forEach(function(d){

@@ -20,7 +20,7 @@ class Routers extends Component {
         return <Router history={this.props.history}>
             <Route path={"/"} component={Layout}>
                 {pages.map((page, i)=>{
-                    return <Route path={page} getComponent={(nextState, callback)=>{
+                    return <Route key={i} path={page} getComponent={(nextState, callback)=>{
                         require.ensure([], function(require) {
                             var Comp = require('./pages/' + page + '.jsx');
                             callback(null, Comp.default);

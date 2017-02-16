@@ -7,10 +7,9 @@ import generator from './dnd/generator.jsx';
 class Input extends Component {
     constructor(props) {
         super(props);
-
         this.state = {};
         editable.className(this, 'medium');
-        editable.styles(this);
+        editable.styles(this,props.source.style);
         editable.properties(this);
     }
 

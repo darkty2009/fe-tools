@@ -19,6 +19,8 @@ class Column extends Component {
             list:[]
         };
         let _this = this;
+
+        //当存在子组件的时候，添加子组件
         if(props.source && props.source.content && props.source.content.length){
             let list = this.state.list = [];
             props.source.content.forEach(function(d){
