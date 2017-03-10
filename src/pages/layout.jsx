@@ -14,6 +14,9 @@ import Container from './layout/components/container.jsx';
 
 import components from './layout/components.jsx';
 
+import {formatToShow} from './layout/components/modules/formatModuleData.jsx';
+import { getLayoutEventList, addLayoutEvent, editLayoutEvent } from '../actions/layout.jsx';
+
 class CodeContent extends Component {
     constructor(props) {
         super(props);
@@ -60,6 +63,8 @@ class LayoutTool extends Component {
         $(window).resize(()=>{
             $('.menu-left,.property-right').height($(window).height() - 44);
         }).resize();
+
+        this.getModules();
     }
 
     componentWillUnmount() {
@@ -87,6 +92,7 @@ class LayoutTool extends Component {
     }
 
     previewCode(val) {
+        console.log(this.refs.content.decoratedComponentInstance.getSourceData());
         RUI.DialogManager.confirm({
             title:<h5>源码<label style={{color:'#666'}}>（直接复制）</label></h5>,
             message:<CodeContent code={this.getSourceCode()} />,
@@ -97,7 +103,12 @@ class LayoutTool extends Component {
         })
     }
 
+    getModules(){
+        this.props.getLayoutEventList();
+    }
+
     render() {
+        console.log(this.props.list);
         return <div className="page page-layout">
             {this.state.preview && (
                 <div className="topbar">
@@ -148,8 +159,10 @@ class LayoutTool extends Component {
                     </Accordion>
                 </div>
                 <div className="menu-panel">
-                    <Accordion title={"模板 "+`${components.module.length}`}>
-                        {components.module.map(function(item, index) {
+                    <Accordion title={"模板 "+`${this.props.list.length}`}>
+                        {this.props.list.map(function(item, index) {
+                            item.content = formatToShow(item.content);
+                            item.component = 'row';
                             return <ComponentItem data={item} key={item.title} />
                         })}
                     </Accordion>
@@ -170,7 +183,9 @@ class LayoutTool extends Component {
 LayoutTool = DragDropContext(Backend)(LayoutTool);
 
 export default connect(function(state) {
-    return state;
+    return state.layoutReducer
 }, {
-
+    getLayoutEventList,
+    addLayoutEvent,
+    editLayoutEvent
 })(LayoutTool);

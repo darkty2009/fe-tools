@@ -6,6 +6,7 @@ import Column from './column.jsx';
 import { DropTarget } from 'react-dnd';
 import generator from './dnd/generator.jsx';
 import unique from '../../../util/unique.jsx';
+import {formatToEdit} from './modules/formatModuleData.jsx';
 
 const boxTarget = generator.createDropTarget('row');
 
@@ -30,6 +31,14 @@ class Container extends Component {
         }).join("");
         return `<div className="auto-container">${result}</div>`;
     }
+
+    getSourceData() {
+        var result = this.state.list.map((row, index)=>{
+            return row.props.source;
+        });
+        return format(result);
+    }
+
 
     componentDidMount() {
 
@@ -61,6 +70,7 @@ class Container extends Component {
 
     render() {
         const { greedy, isOver, isOverCurrent, connectDropTarget, children } = this.props;
+        console.log(this.state.list);
         return connectDropTarget(<div className={"layoutit-container "+(isOverCurrent ? 'dashed' : '') }>
             {this.state.list.map((item, index)=>{
                 return React.cloneElement(item, {

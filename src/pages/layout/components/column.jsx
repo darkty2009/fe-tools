@@ -20,7 +20,7 @@ class Column extends Component {
         };
         let _this = this;
 
-        //µ±´æÔÚ×Ó×é¼þµÄÊ±ºò£¬Ìí¼Ó×Ó×é¼þ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if(props.source && props.source.content && props.source.content.length){
             let list = this.state.list = [];
             props.source.content.forEach(function(d){
@@ -46,7 +46,8 @@ class Column extends Component {
             'flex-end',
             'space-between',
             'space-around',
-            'initial'
+            'initial',
+            'flex-col'
         ];
     }
 
