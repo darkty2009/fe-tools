@@ -20,14 +20,15 @@ class Row extends Component {
         };
         let _this = this;
 
-        //µ±´æÔÚ×ÓÁÐµÄÊ±ºò,Ìí¼Ó×ÓÁÐ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Ê±ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if(props.source && props.source.content && props.source.content.length){
             let list = this.state.list = [];
             props.source.content.forEach(function(d){
                 list.push(<Column index={unique()} source={d} editable={true} onDelete={_this.removeChild.bind(_this)} />);
             });
+            editable.styles(this,props.source.styles);
         }
-        editable.styles(this);
+
     }
     getSourceCode() {
         var result = this.state.list.map((column, index)=>{
@@ -35,6 +36,14 @@ class Row extends Component {
             return column.decoratedComponentInstance.getSourceCode();
         }).join("");
         return `<div className="${"auto-row"}" style={${JSON.stringify(this.state.styles)}}>${result}</div>`;
+    }
+
+    getSourceData() {
+        var result = this.state.list.map((column, index)=>{
+            var column = this.refs["item"+index];
+            return column.decoratedComponentInstance.getSourceData();
+        });
+        return result;
     }
 
     addChild(Instance, source) {

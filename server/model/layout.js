@@ -1,3 +1,3 @@
 module.exports = Object.assign({
-    table: 'module'
+    table: 'layout'
 }, require('./base.js'));

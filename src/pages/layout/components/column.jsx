@@ -27,8 +27,8 @@ class Column extends Component {
                 list.push(<d.define index={unique()} source={d} editable={true} onDelete={_this.removeChild.bind(_this)} />);
             });
         }
-        editable.className(this, 'flex-start');
-        editable.styles(this);
+        editable.className(this, props.source && props.source.className ? props.source.className : 'flex-start');
+        editable.styles(this,props.source && props.source.className ? props.source.className:{});
     }
 
     getSourceCode() {
@@ -37,6 +37,14 @@ class Column extends Component {
             return comp.getSourceCode();
         }).join("");
         return `<div className="${"auto-column "+this.state.className}" style={${JSON.stringify(this.state.styles)}}>${result}</div>`;
+    }
+
+    getSourceData() {
+        var result = this.state.list.map((comp, index)=>{
+            var comp = this.refs["item"+index];
+            return comp.getSourceData();
+        });
+        return result
     }
 
     getDefaultClassName() {

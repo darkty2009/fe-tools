@@ -34,9 +34,10 @@ class Container extends Component {
 
     getSourceData() {
         var result = this.state.list.map((row, index)=>{
-            return row.props.source;
+            var row = this.refs["item" + index];
+            return row.decoratedComponentInstance.getSourceData();
         });
-        return format(result);
+        return result;
     }
 
 

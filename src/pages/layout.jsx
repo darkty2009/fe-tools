@@ -16,6 +16,7 @@ import components from './layout/components.jsx';
 
 import {formatToShow} from './layout/components/modules/formatModuleData.jsx';
 import { getLayoutEventList, addLayoutEvent, editLayoutEvent } from '../actions/layout.jsx';
+import base64 from '../util/base64.jsx';
 
 class CodeContent extends Component {
     constructor(props) {
@@ -55,7 +56,9 @@ class LayoutTool extends Component {
 
         this.state = {
             mode: 'pc',
-            preview: ''
+            preview: '',
+            moduleTitle:'新建模板',
+            moduleItem:{key:'新建模板',value:''}
         };
     }
 
@@ -92,7 +95,6 @@ class LayoutTool extends Component {
     }
 
     previewCode(val) {
-        console.log(this.refs.content.decoratedComponentInstance.getSourceData());
         RUI.DialogManager.confirm({
             title:<h5>源码<label style={{color:'#666'}}>（直接复制）</label></h5>,
             message:<CodeContent code={this.getSourceCode()} />,
@@ -102,17 +104,45 @@ class LayoutTool extends Component {
             }
         })
     }
+    saveModules(){
+        var name = this.state.moduleTitle;
+        if(!name){
+            RUI.DialogManager.alert('模板名不能为空');
+            return false;
+        }
+        var data = {
+            title:name,
+            content:base64.encode(JSON.stringify(this.refs.content.decoratedComponentInstance.getSourceData()))
+        }
+        if(this.state.moduleItem.value){
+            data.id = this.state.moduleItem.value;
+            this.props.editLayoutEvent(data);
+        }else{
+            this.props.addLayoutEvent(data);
+        }
+    }
 
     getModules(){
         this.props.getLayoutEventList();
     }
 
     render() {
-        console.log(this.props.list);
+        let {list} = this.props;
+        let moduleData = [{key:'新建模板',value:''}].concat(list.map(function(d,i){
+            return {key:d.title,value:d.id}
+        }));
         return <div className="page page-layout">
             {this.state.preview && (
                 <div className="topbar">
                     <RUI.Button onClick={()=>this.preview()}>继续编辑</RUI.Button>
+                    <RUI.Button onClick={()=>{
+                        this.setState({
+                            moduleItem:{key:'新建模板',value:''},
+                            moduleTitle:moduleData[0].key
+                        },function(){
+                            this.refs.addModule.show();
+                        })
+                    }}>保存模板</RUI.Button>
                     <RUI.Button onClick={()=>this.previewCode(true)}>查看源码</RUI.Button>
                 </div>
             )}
@@ -159,8 +189,8 @@ class LayoutTool extends Component {
                     </Accordion>
                 </div>
                 <div className="menu-panel">
-                    <Accordion title={"模板 "+`${this.props.list.length}`}>
-                        {this.props.list.map(function(item, index) {
+                    <Accordion title={"模板 "+`${list.length}`}>
+                        {list.map(function(item, index) {
                             item.content = formatToShow(item.content);
                             item.component = 'row';
                             return <ComponentItem data={item} key={item.title} />
@@ -176,6 +206,34 @@ class LayoutTool extends Component {
             <div className={"property-right " + (this.state.preview)}>
                 <ComponentEditor ref="editor" />
             </div>
+            <RUI.Dialog ref="addModule" title="保存模板" buttons="submit,cancel"  onSubmit={this.saveModules.bind(this)}>
+                <div className="auto-container">
+                    <div className="auto-row" style={{}}>
+                        <div className="auto-column flex-start" style={{}}>
+                            <span  >选择模板：</span>
+                            <RUI.Select ref="moduleSelect" className="rui-theme-1 w174 " event={"click"} data={moduleData}
+                                value={this.state.moduleItem}
+                                callback={(e)=>{
+                                    this.setState({
+                                        moduleItem:e,
+                                        moduleTitle:e.key
+                                    })
+                                }}
+                                ></RUI.Select>
+                        </div>
+                    </div>
+                    <div className="auto-row" style={{marginTop:"20px"}}>
+                        <div className="auto-column flex-start" style={{}}>
+                            <span  >模板名称：</span>
+                            <RUI.Input className="w174 " value={this.state.moduleTitle} onBlur={(e)=>{
+                                this.setState({
+                                    moduleTitle:e.target.value
+                                })
+                            }}/>
+                        </div>
+                    </div>
+                </div>
+            </RUI.Dialog>
         </div>;
     }
 }

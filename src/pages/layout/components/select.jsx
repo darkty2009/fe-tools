@@ -9,13 +9,18 @@ class Select extends Component {
         super(props);
 
         this.state = {};
-        editable.className(this, 'rui-theme-1');
-        editable.styles(this);
-        editable.properties(this);
+        let {className,styles,properties} = props.source;
+        editable.className(this, className||'rui-theme-1');
+        editable.styles(this,styles);
+        editable.properties(this,properties);
     }
 
     getTagName() {
         return "RUI.Select";
+    }
+    //必须和文件名保持一致
+    getTypeName() {
+        return "select";
     }
 
     getDefaultClassName() {

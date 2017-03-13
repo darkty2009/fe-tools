@@ -9,13 +9,18 @@ class Text extends Component {
         super(props);
 
         this.state = {};
-        editable.className(this);
-        editable.styles(this);
-        editable.children(this, '文本区域');
+        let {className,styles,children} = props.source;
+        editable.className(this,className);
+        editable.styles(this,styles);
+        editable.children(this, children||'文本区域');
     }
 
     getTagName() {
         return "span";
+    }
+    //必须和文件名保持一致
+    getTypeName() {
+        return "text";
     }
 
     getDefaultClassName() {

@@ -9,12 +9,16 @@ class Textarea extends Component {
         super(props);
 
         this.state = {};
-        editable.styles(this);
-        editable.properties(this);
+        let {styles,properties} = props.source;
+        editable.styles(this,styles);
+        editable.properties(this,properties);
     }
 
     getTagName() {
         return "RUI.Textarea";
+    }
+    getTypeName(){
+        return "textarea";
     }
 
     getDefaultProperties() {

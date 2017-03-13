@@ -9,13 +9,21 @@ class Radio extends Component {
         super(props);
 
         this.state = {};
-        editable.all(this, {
-            children:'单选项'
+        let {className,styles,properties,children} = props.source;
+        editable.all(this,{
+            className:className,
+            styles:styles,
+            properties:properties,
+            children:children||'单项选'
         });
     }
 
     getTagName() {
         return "RUI.Radio";
+    }
+    //必须和文件名保持一致
+    getTypeName() {
+        return "radio";
     }
 
     getDefaultClassName() {

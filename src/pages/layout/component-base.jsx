@@ -8,13 +8,28 @@ export default (ComposedComponent, type)=>{
     class ComponentBase extends Component {
 
         static contextTypes = {
-            editor: PropTypes.object,
+            editor: PropTypes.object
         }
 
         constructor(props) {
             super(props);
         }
 
+        getSourceData() {
+            var item = {};
+            var content = this.refs.content;
+            item.styles = content.state.styles;
+            item.children = content.state.children;
+            item.className = content.state.className;
+            item.properties = content.state.properties;
+            if(type == 'row' || type == 'column') {
+                item.type = type;
+                item.content =  this.refs.content.getSourceData();
+            }else{
+                item.type = content.getTypeName();
+            }
+            return item;
+        }
         getSourceCode() {
             if(type == 'row' || type == 'column') {
                 return this.refs.content.getSourceCode();

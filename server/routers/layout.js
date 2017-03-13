@@ -44,8 +44,8 @@ var route = new Route({
 
 route.get('/list', function *list() {
     this.type = 'application/json';
-    var list = yield data;
-    //var list = yield layout.select();
+    //var list = yield data;
+    var list = yield layout.select();
     this.body = format(true, list);
 });
 
