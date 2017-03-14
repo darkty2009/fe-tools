@@ -71,7 +71,6 @@ class Container extends Component {
 
     render() {
         const { greedy, isOver, isOverCurrent, connectDropTarget, children } = this.props;
-        console.log(this.state.list);
         return connectDropTarget(<div className={"layoutit-container "+(isOverCurrent ? 'dashed' : '') }>
             {this.state.list.map((item, index)=>{
                 return React.cloneElement(item, {

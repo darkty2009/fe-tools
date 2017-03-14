@@ -8,7 +8,6 @@ import base64 from '../util/base64.jsx';
 export function getLayoutEventComplete(data) {
     data = data.map(function(item,i){
         item.content = JSON.parse(base64.decode(item.content));
-        console.log(item.title,item.content);
         return item;
     })
     return {

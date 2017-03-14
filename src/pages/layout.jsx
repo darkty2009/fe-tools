@@ -211,13 +211,13 @@ class LayoutTool extends Component {
                     <div className="auto-row" style={{}}>
                         <div className="auto-column flex-start" style={{}}>
                             <span  >选择模板：</span>
-                            <RUI.Select ref="moduleSelect" className="rui-theme-1 w174 " event={"click"} data={moduleData}
+                            <RUI.Select ref="moduleSelect" key={"module"+this.state.moduleItem.value} className="rui-theme-1 w174 " event={"click"} data={moduleData}
                                 value={this.state.moduleItem}
                                 callback={(e)=>{
                                     this.setState({
-                                        moduleItem:e,
-                                        moduleTitle:e.key
-                                    })
+                                        moduleItem : e ,
+                                        moduleTitle : e.key
+                                    });
                                 }}
                                 ></RUI.Select>
                         </div>
