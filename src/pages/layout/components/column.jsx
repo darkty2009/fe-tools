@@ -28,7 +28,7 @@ class Column extends Component {
             });
         }
         editable.className(this, props.source && props.source.className ? props.source.className : 'flex-start');
-        editable.styles(this,props.source && props.source.className ? props.source.className:{});
+        editable.styles(this,props.source && props.source.styles ? props.source.styles:{});
     }
 
     getSourceCode() {
