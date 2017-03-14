@@ -26,8 +26,8 @@ class Row extends Component {
             props.source.content.forEach(function(d){
                 list.push(<Column index={unique()} source={d} editable={true} onDelete={_this.removeChild.bind(_this)} />);
             });
-            editable.styles(this,props.source.styles);
         }
+        editable.styles(this,props.source?props.source.styles:null);
 
     }
     getSourceCode() {
@@ -72,7 +72,7 @@ class Row extends Component {
 
     render() {
         const { greedy, isOver, isOverCurrent, connectDropTarget, children } = this.props;
-        return connectDropTarget(<div className={"layoutit-row "+(isOverCurrent ? 'dashed' : '') }>
+        return connectDropTarget(<div key={this.state.list.length} className={"layoutit-row "+(isOverCurrent ? 'dashed' : '') }>
             {this.state.list.map((item, index)=>{
                 return React.cloneElement(item, {
                     ref:"item"+index

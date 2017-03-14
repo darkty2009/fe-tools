@@ -33,7 +33,7 @@ class CodeContent extends Component {
     }
 
     render() {
-        return <div className="code-preview">
+        return <div className="code-preview" style={{"maxWidth":"600px"}}>
             <textarea ref="codetext">{this.props.code || ""}</textarea>
         </div>;
     }

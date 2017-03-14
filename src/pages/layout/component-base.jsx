@@ -44,9 +44,22 @@ export default (ComposedComponent, type)=>{
             if(Tag == 'img') {
                 return `<${Tag} ${className ? `className="${className}"` : ""} ${empty(styles) ? "" : `style={${JSON.stringify(styles)}}`} />`;
             }
-            return `<${Tag} ${className ? `className="${className}"` : ""} ${empty(styles) ? "" : `style={${JSON.stringify(styles)}}`}>${children ? children : ""}</${Tag}>`;
+            return `<${Tag} ${className ? `className="${className}"` : ""} ${empty(styles) ? "" : `style={${JSON.stringify(styles)}}`} ${this.jsonToProp(content.state.properties)}>${children ? children : ""}</${Tag}>`;
         }
 
+        jsonToProp(obj){
+            let properties = "";
+            if(typeof obj != 'object'){
+                return properties
+            }
+            for(var k in obj){
+                let val = obj[k];
+                if(val!==undefined && val !== null && val!==""){
+                    properties += `${k}={${JSON.stringify(obj[k])}} `;
+                }
+            }
+            return properties;
+        }
         addChild(Instance, source) {
             this.refs.content.addChild(Instance, source);
         }
@@ -61,7 +74,6 @@ export default (ComposedComponent, type)=>{
             if(this.props && this.props.onDelete) {
                 this.props.onDelete(this);
             }
-
             this.context.editor().setComponent(null);
         }
 
