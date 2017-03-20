@@ -72,7 +72,7 @@ class Row extends Component {
 
     render() {
         const { greedy, isOver, isOverCurrent, connectDropTarget, children } = this.props;
-        return connectDropTarget(<div key={this.state.list.length} className={"layoutit-row "+(isOverCurrent ? 'dashed' : '') }>
+        return connectDropTarget(<div className={"layoutit-row "+(isOverCurrent ? 'dashed' : '') }>
             {this.state.list.map((item, index)=>{
                 return React.cloneElement(item, {
                     ref:"item"+index

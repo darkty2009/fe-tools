@@ -20,7 +20,7 @@ class Column extends Component {
         };
         let _this = this;
 
-        //�������������ʱ����������
+        //当存在子组件的时候，添加子组件
         if(props.source && props.source.content && props.source.content.length){
             let list = this.state.list = [];
             props.source.content.forEach(function(d){
@@ -85,7 +85,7 @@ class Column extends Component {
 
     render() {
         const { greedy, isOver, isOverCurrent, connectDropTarget, children } = this.props;
-        return connectDropTarget(<div key={this.state.list.length} className={"layoutit-column "+(isOverCurrent ? 'dashed' : '') + (" " + this.state.className) }>
+        return connectDropTarget(<div className={"layoutit-column "+(isOverCurrent ? 'dashed' : '') + (" " + this.state.className) }>
             {this.state.list.map((item, index)=>{
                 return React.cloneElement(item, {
                     ref:"item"+index
