@@ -54,7 +54,7 @@ route.post('/upload/file', body({multipart:true}), function* file() {
     });
 });
 
-router.get('/generator', function *generator() {
+route.get('/generator', function *generator() {
     this.type = 'application/json';
     var result = yield build.add({
         time:Date.now()
