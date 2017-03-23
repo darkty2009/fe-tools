@@ -1,5 +1,5 @@
 import './common/reset.scss';
-import 'babel-runtime/regenerator/runtime.js';
+import 'babel-runtime/regenerator/index.js';
 import './util/jquery-qrcode.js';
 import './util/jquery-qrdecode.js';
 
@@ -25,6 +25,7 @@ const store = createStore(
     compose(
         applyMiddleware(thunk)
     )
+    //to do
 );
 
 const history = syncHistoryWithStore(hashHistory, store);
