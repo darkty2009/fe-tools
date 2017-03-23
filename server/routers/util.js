@@ -7,6 +7,7 @@ var md5 = require('md5');
 var os = require('os');
 var format = require('../util/format.js');
 var body = require('koa-better-body');
+var build = require('../model/build.js');
 
 var route = new Route({
     prefix:'/util'
@@ -51,6 +52,14 @@ route.post('/upload/file', body({multipart:true}), function* file() {
         hash:hash,
         type:type || ""
     });
+});
+
+router.get('/generator', function *generator() {
+    this.type = 'application/json';
+    var result = yield build.add({
+        time:Date.now()
+    });
+    this.body = format(true, result.id);
 });
 
 module.exports = route.routes();
