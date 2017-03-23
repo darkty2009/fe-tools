@@ -59,7 +59,7 @@ route.get('/generator', function *generator() {
     var result = yield build.add({
         time:Date.now()
     });
-    this.body = format(true, result.id);
+    this.body = format(true, result);
 });
 
 module.exports = route.routes();
