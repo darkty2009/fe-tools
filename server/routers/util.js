@@ -38,7 +38,11 @@ route.post('/upload/file', body({multipart:true}), function* file() {
         try {
             hash = md5(Math.random().toString());
             var file = files[0];
-            var newpath = path.resolve(__dirname, `../../upload/${hash}`);
+            var dirpath = path.resolve(__dirname, '../../upload');
+            if(!fs.existsSync(dirpath)) {
+                fs.mkdirSync(dirpath);
+            }
+            var newpath = path.resolve(dirpath, `${hash}`);
             var stream = fs.createWriteStream(newpath);
             fs.createReadStream(file.path).pipe(stream);
 

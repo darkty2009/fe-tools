@@ -54,11 +54,11 @@ export default class ComponentEditor extends Component {
         this.editorStyleContent = {};
     }
 
-    setComponent(comp) {
+    setComponent(comp, cb) {
         this.editorStyleContent = {};
         this.setState({
             comp
-        });
+        }, cb);
     }
 
     classNameChange(event) {

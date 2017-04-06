@@ -74,7 +74,9 @@ export default (ComposedComponent, type)=>{
             if(this.props && this.props.onDelete) {
                 this.props.onDelete(this);
             }
-            this.context.editor().setComponent(null);
+            this.context.editor().setComponent(this.refs.content, function() {
+                this.context.editor().setComponent(null);
+            }.bind(this));
         }
 
         render() {

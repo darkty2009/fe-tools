@@ -18,6 +18,7 @@ export default class Layout extends Component {
                         <li><Link to="/qrcode" activeClassName="active">二维码</Link></li>
                         <li><Link to="/todo" activeClassName="active">分享会</Link></li>
                         <li><Link to="/scanpay" activeClassName="active">扫码付</Link></li>
+                        <li><Link to="/checkin" activeClassName="active">考勤分析</Link></li>
                     </ul>
                 </div>
             </div>

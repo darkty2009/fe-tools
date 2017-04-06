@@ -9,6 +9,8 @@ var path = require('path');
 var process = require('process');
 var ENV = process.env.NODE_ENV;
 
+process.env.TZ = 'Asia/Shanghai';
+
 const app = koa();
 
 route.get('/', index)
@@ -19,6 +21,7 @@ app.use(require('./routers/event.js'));
 app.use(require('./routers/layout.js'));
 app.use(require('./routers/scanpay.js'));
 app.use(require('./routers/todo.js'));
+app.use(require('./routers/checkin.js'));
 
 app.use(serve('.'));
 

@@ -1,5 +1,25 @@
 @import '../common/function';
 
+::-webkit-scrollbar
+{
+    width: 1px;
+    height: 1px;
+}
+::-webkit-scrollbar-track-piece
+{
+    background-color: #efefef;
+}
+::-webkit-scrollbar-thumb:vertical
+{
+    height: 12px;
+    background-color: #acacac;
+}
+::-webkit-scrollbar-thumb:horizontal
+{
+    width: 12px;
+    background-color: #efefef;
+}
+
 .page {
   margin:0;
 }

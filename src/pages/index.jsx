@@ -5,5 +5,6 @@ export default [
     'layout',
     'scanpay',
     'layout-preview',
-    'todo'
+    'todo',
+    'checkin'
 ];

@@ -10,4 +10,5 @@ db.serialize(function() {
 
 	db.run('CREATE TABLE build(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, time VARCHAR(13))');
 	db.run('DROP TABLE IF EXISTS layout');
-    db.run('CREATE TABLE layout(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, title VARCHAR(32) NOT NULL, content TEXT)');});
+    db.run('CREATE TABLE layout(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, title VARCHAR(32) NOT NULL, content TEXT)');
+});
