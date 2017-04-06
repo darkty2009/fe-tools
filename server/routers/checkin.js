@@ -59,19 +59,29 @@ function parseExcel(hash) {
                 var hours = time % 86400000;
                 var check = (hours/ 1800000) + "";
                 if(check.match(/\.9[3-9]/)) {
-                    hours = Math.ceil(hours / 1800000) + 16;
+                    hours = Math.ceil(hours / 1800000);
                 }else {
-                    hours = Math.floor(hours/ 1800000) + 16;
+                    hours = Math.floor(hours/ 1800000);
                 }
-                if(hours >= 40) {
-                    var halfhours = (time - time % 86400000) + 41 * 1800000 - 8 * 3600000
-                    table.push({
+                if(hours >= 24) {
+                    var halfhours = (time - time % 86400000) + (hours+16) * 1800000 - 8 * 3600000;
+                    var item = {
                         department:item[0],
                         name:name,
                         start:dateString(time, true),
                         end:dateString(halfhours),
-                        long:hourString(hours - 37)
-                    });
+                        long:hourString(hours - 21)
+                    };
+
+                    var lastitem = table[table.length-1];
+                    if(lastitem) {
+                        var lastitemtime = new Date(lastitem.end);
+                        var itemtime = new Date(item.end);
+                        if(lastitemtime.getFullYear() == itemtime.getFullYear() && lastitemtime.getMonth()==itemtime.getMonth()&&lastitemtime.getDate()==itemtime.getDate()) {
+                            table.pop();
+                        }
+                    }
+                    table.push(item);
                 }
             }
             last = {
