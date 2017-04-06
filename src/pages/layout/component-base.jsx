@@ -8,13 +8,28 @@ export default (ComposedComponent, type)=>{
     class ComponentBase extends Component {
 
         static contextTypes = {
-            editor: PropTypes.object,
+            editor: PropTypes.object
         }
 
         constructor(props) {
             super(props);
         }
 
+        getSourceData() {
+            var item = {};
+            var content = this.refs.content;
+            item.styles = content.state.styles;
+            item.children = content.state.children;
+            item.className = content.state.className;
+            item.properties = content.state.properties;
+            if(type == 'row' || type == 'column') {
+                item.type = type;
+                item.content =  this.refs.content.getSourceData();
+            }else{
+                item.type = content.getTypeName();
+            }
+            return item;
+        }
         getSourceCode() {
             if(type == 'row' || type == 'column') {
                 return this.refs.content.getSourceCode();
@@ -29,9 +44,22 @@ export default (ComposedComponent, type)=>{
             if(Tag == 'img') {
                 return `<${Tag} ${className ? `className="${className}"` : ""} ${empty(styles) ? "" : `style={${JSON.stringify(styles)}}`} />`;
             }
-            return `<${Tag} ${className ? `className="${className}"` : ""} ${empty(styles) ? "" : `style={${JSON.stringify(styles)}}`}>${children ? children : ""}</${Tag}>`;
+            return `<${Tag} ${className ? `className="${className}"` : ""} ${empty(styles) ? "" : `style={${JSON.stringify(styles)}}`} ${this.jsonToProp(content.state.properties)}>${children ? children : ""}</${Tag}>`;
         }
 
+        jsonToProp(obj){
+            let properties = "";
+            if(typeof obj != 'object'){
+                return properties
+            }
+            for(var k in obj){
+                let val = obj[k];
+                if(val!==undefined && val !== null && val!==""){
+                    properties += `${k}={${JSON.stringify(obj[k])}} `;
+                }
+            }
+            return properties;
+        }
         addChild(Instance, source) {
             this.refs.content.addChild(Instance, source);
         }
@@ -46,7 +74,6 @@ export default (ComposedComponent, type)=>{
             if(this.props && this.props.onDelete) {
                 this.props.onDelete(this);
             }
-
             this.context.editor().setComponent(null);
         }
 

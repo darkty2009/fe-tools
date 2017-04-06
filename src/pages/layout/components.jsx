@@ -22,6 +22,9 @@ export default {
         {title:'分页', define:require('./components/pagination.jsx').default},
         {title:'数字调节器', define:require('./components/number-spinner.jsx').default},
         {title:'滑动条', define:require('./components/slider-spinner.jsx').default},
-        {title:'轮播图', define:require('./components/slider.jsx').default}
+        {title:'轮播图', define:require('./components/slider.jsx').default},
+    ],
+    module:[
+        {title:'列表模板',content:require('./components/modules/list.jsx').default,component:'row'}
     ]
 };

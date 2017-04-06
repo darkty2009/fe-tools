@@ -9,12 +9,17 @@ class Spinner extends Component {
         super(props);
 
         this.state = {};
-        editable.styles(this);
-        editable.properties(this);
+        let {styles,properties} = props.source;
+        editable.styles(this,styles);
+        editable.properties(this,properties);
     }
 
     getTagName() {
         return "RUI.Spinner";
+    }
+    //必须和文件名保持一致
+    getTypeName() {
+        return "slider-spinner";
     }
 
     getDefaultClassName() {

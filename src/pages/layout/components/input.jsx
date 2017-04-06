@@ -7,15 +7,19 @@ import generator from './dnd/generator.jsx';
 class Input extends Component {
     constructor(props) {
         super(props);
-
         this.state = {};
-        editable.className(this, 'medium');
-        editable.styles(this);
-        editable.properties(this);
+        let {className,styles,properties} = props.source;
+        editable.className(this, className||'medium');
+        editable.styles(this,styles);
+        editable.properties(this,properties);
     }
 
     getTagName() {
         return "RUI.Input";
+    }
+    //必须和文件名保持一致
+    getTypeName() {
+        return "input";
     }
 
     getDefaultClassName() {

@@ -4,16 +4,26 @@ export default {
             drop(props, monitor, component) {
                 var result = monitor.getItem();
                 if(result) {
-                    component.addChild(result.data.define, result.data);
+                    if(!result.data.content){
+                        component.addChild(result.data.define, result.data);
+                    }else{
+                        result.data.content.forEach(function(d){
+                            component.addChild(d.define, d);
+                        });
+                    }
                 }
             },
             canDrop(props, monitor) {
                 var result = monitor.getItem();
                 if(result) {
-                    if(type instanceof Array) {
-                        return type.indexOf(result.data.define.component) >= 0;
+                    if(!result.data.content){
+                        if(type instanceof Array) {
+                            return type.indexOf(result.data.define.component) >= 0;
+                        }
+                        return result.data.define.component == type;
+                    }else{
+                        return result.data.component == type;
                     }
-                    return result.data.define.component == type;
                 }
                 return false;
             }

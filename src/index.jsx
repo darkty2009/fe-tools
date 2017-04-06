@@ -25,7 +25,6 @@ const store = createStore(
     compose(
         applyMiddleware(thunk)
     )
-    //to do
 );
 
 const history = syncHistoryWithStore(hashHistory, store);

@@ -9,11 +9,19 @@ class Button extends Component {
         super(props);
 
         this.state = {};
-        editable.all(this, {
-            children:'确认'
+        let {className,styles,properties,children} = props.source;
+        editable.all(this,{
+            className:className,
+            styles:styles,
+            properties:properties,
+            children:children||"确认"
         });
     }
 
+    //必须和文件名保持一致
+    getTypeName() {
+        return "button";
+    }
     getTagName() {
         return "RUI.Button";
     }

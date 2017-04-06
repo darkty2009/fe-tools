@@ -13,22 +13,37 @@ const collect = generator.createDropCollect();
 class Row extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             hasDropped: false,
             hasDroppedOnChild: false,
             list:[<Column index={unique()} />]
         };
+        let _this = this;
 
-        editable.styles(this);
+        //���������е�ʱ��,�������
+        if(props.source && props.source.content && props.source.content.length){
+            let list = this.state.list = [];
+            props.source.content.forEach(function(d){
+                list.push(<Column index={unique()} source={d} editable={true} onDelete={_this.removeChild.bind(_this)} />);
+            });
+        }
+        editable.styles(this,props.source?props.source.styles:null);
+
     }
-
     getSourceCode() {
         var result = this.state.list.map((column, index)=>{
             var column = this.refs["item"+index];
             return column.decoratedComponentInstance.getSourceCode();
         }).join("");
         return `<div className="${"auto-row"}" style={${JSON.stringify(this.state.styles)}}>${result}</div>`;
+    }
+
+    getSourceData() {
+        var result = this.state.list.map((column, index)=>{
+            var column = this.refs["item"+index];
+            return column.decoratedComponentInstance.getSourceData();
+        });
+        return result;
     }
 
     addChild(Instance, source) {

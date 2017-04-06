@@ -18,9 +18,17 @@ class Column extends Component {
             hasDroppedOnChild: false,
             list:[]
         };
+        let _this = this;
 
-        editable.className(this, 'flex-start');
-        editable.styles(this);
+        //当存在子组件的时候，添加子组件
+        if(props.source && props.source.content && props.source.content.length){
+            let list = this.state.list = [];
+            props.source.content.forEach(function(d){
+                list.push(<d.define index={unique()} source={d} editable={true} onDelete={_this.removeChild.bind(_this)} />);
+            });
+        }
+        editable.className(this, props.source && props.source.className ? props.source.className : 'flex-start');
+        editable.styles(this,props.source && props.source.styles ? props.source.styles:{});
     }
 
     getSourceCode() {
@@ -31,6 +39,14 @@ class Column extends Component {
         return `<div className="${"auto-column "+this.state.className}" style={${JSON.stringify(this.state.styles)}}>${result}</div>`;
     }
 
+    getSourceData() {
+        var result = this.state.list.map((comp, index)=>{
+            var comp = this.refs["item"+index];
+            return comp.getSourceData();
+        });
+        return result
+    }
+
     getDefaultClassName() {
         return [
             'flex-start',
@@ -38,7 +54,8 @@ class Column extends Component {
             'flex-end',
             'space-between',
             'space-around',
-            'initial'
+            'initial',
+            'flex-col'
         ];
     }
 

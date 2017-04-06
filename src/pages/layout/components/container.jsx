@@ -6,6 +6,7 @@ import Column from './column.jsx';
 import { DropTarget } from 'react-dnd';
 import generator from './dnd/generator.jsx';
 import unique from '../../../util/unique.jsx';
+import {formatToEdit} from './modules/formatModuleData.jsx';
 
 const boxTarget = generator.createDropTarget('row');
 
@@ -30,6 +31,15 @@ class Container extends Component {
         }).join("");
         return `<div className="auto-container">${result}</div>`;
     }
+
+    getSourceData() {
+        var result = this.state.list.map((row, index)=>{
+            var row = this.refs["item" + index];
+            return row.decoratedComponentInstance.getSourceData();
+        });
+        return result;
+    }
+
 
     componentDidMount() {
 
