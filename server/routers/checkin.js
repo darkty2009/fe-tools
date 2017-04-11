@@ -28,7 +28,7 @@ function dateString(time, justStart) {
     if(justStart) {
         return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()} 18:30:00`;
     }else {
-        return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()<10?'0'+d.getSeconds():d.getSeconds()}`;
+        return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()<10?'0'+d.getMinutes():d.getMinutes()}:${d.getSeconds()<10?'0'+d.getSeconds():d.getSeconds()}`;
     }
 }
 
